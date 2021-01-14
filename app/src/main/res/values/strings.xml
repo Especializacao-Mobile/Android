@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Fruits</string>
+    <string name="description_float_add_fruit">float button to add fruit</string>
+    <string name="fruit_name">Fruit Name</string>
+    <string name="fruit_benefits">Fruit Benefits</string>
+    <string name="generic_error">Something went wrong!</string>
+    <string name="error_pick_image">You haven\'t picked Image!</string>
+    <string name="remove_fruit">Remove fruit</string>
+    <string name="add_fruit">add fruit</string>
+    <string name="error_empty_name">Empty Name!</string>
+    <string name="error_empty_benefits">Empty Benefits!</string>
+</resources>

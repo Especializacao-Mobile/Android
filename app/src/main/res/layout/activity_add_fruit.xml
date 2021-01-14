@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.addfruit.AddFruitActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_default">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:src="@android:drawable/ic_input_add"
+            android:id="@+id/fruit_image"
+            android:layout_width="@dimen/image_item_fruit_size"
+            android:layout_height="@dimen/image_item_fruit_size"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fruit_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_default"
+            app:errorEnabled="true"
+            app:layout_constraintTop_toBottomOf="@id/fruit_image">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tx_fruit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/fruit_name" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fruit_benefits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            app:errorEnabled="true"
+            app:layout_constraintTop_toBottomOf="@id/fruit_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tx_fruit_benefits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/fruit_benefits"
+                android:lines="5" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_fruit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@string/add_fruit"
+            app:layout_constraintTop_toBottomOf="@id/fruit_benefits" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
