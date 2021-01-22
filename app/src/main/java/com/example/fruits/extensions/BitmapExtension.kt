@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import android.util.Base64
 import java.io.ByteArrayOutputStream
 
-
 /**
  * reduces the size of the image
  * @param maxSize
