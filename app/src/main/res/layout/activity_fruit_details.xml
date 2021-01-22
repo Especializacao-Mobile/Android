@@ -13,12 +13,16 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/fruit_image"
-            android:layout_width="@dimen/image_item_fruit_size_detail"
+            android:layout_width="0dp"
             android:layout_height="@dimen/image_item_fruit_size_detail"
             android:scaleType="centerCrop"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginEnd="@dimen/margin_big"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="@dimen/margin_big"
+            android:layout_marginLeft="@dimen/margin_big" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/fruit_name"

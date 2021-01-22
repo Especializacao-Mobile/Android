@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_default">16dp</dimen>
+    <dimen name="margin_big">32dp</dimen>
     <dimen name="image_item_fruit_size">128dp</dimen>
     <dimen name="image_item_fruit_size_detail">256dp</dimen>
     <dimen name="margin_small">8dp</dimen>
