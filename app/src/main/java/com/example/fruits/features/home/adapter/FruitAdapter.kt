@@ -16,7 +16,7 @@ class FruitAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FruitViewHolder {
         binding = FruitsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FruitViewHolder(binding, parent.context)
+        return FruitViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: FruitViewHolder, position: Int) {

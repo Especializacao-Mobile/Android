@@ -86,6 +86,8 @@ class MainActivity : AppCompatActivity() {
             val positionToUpdate = fruits.indexOf(it)
             fruits.remove(it)
             fruitAdapter.notifyItemRemoved(positionToUpdate)
+        } ?: run {
+            showGenericErrorMessage()
         }
     }
 
