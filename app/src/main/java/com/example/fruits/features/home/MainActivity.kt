@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SwitchCompat
@@ -71,11 +73,25 @@ class MainActivity : AppCompatActivity() {
         R.id.action_filter -> {
             val builder = AlertDialog.Builder(this)
             val view = layoutInflater.inflate(R.layout.custom_dialog, null)
+            val duplicated = view.findViewById<SwitchCompat>(R.id.repeated_fruit_should_show)
+            //val sortedOrderGroup = view.findViewById<RadioGroup>(R.id.radio_group_choose_order)
+            val sortedAlphabetic = view.findViewById<RadioButton>(R.id.radio_alphabetic)
+            //val sortedInsert = view.findViewById<RadioButton>(R.id.radio_insert)
+
 
             builder.apply {
                 setView(view)
                 setPositiveButton("Filter") { dialog, _ ->
-
+                    if (duplicated.isChecked || sortedAlphabetic.isActivated){
+                        if (sortedAlphabetic.isActivated) {
+                            fruitAdapter.filter.filter(SORTED_ALPHABETICALLY)
+                        }
+                        if (duplicated.isChecked) {
+                            fruitAdapter.filter.filter(REMOVE_DUPLICATED)
+                        }
+                    } else {
+                        fruitAdapter.filter.filter(NONE)
+                    }
                     dialog.dismiss()
                 }
             }
@@ -152,5 +168,8 @@ class MainActivity : AppCompatActivity() {
         const val MAIN_ACTIVITY_DETAILS_REQUEST_CODE = 1
         const val FRUIT_TO_ADD = "fruit_to_add_to_list"
         const val FRUIT_TO_REMOVE = "fruit_to_remove"
+        const val REMOVE_DUPLICATED = "remove_duplicated"
+        const val SORTED_ALPHABETICALLY = "sorted_alphabetically"
+        const val NONE = ""
     }
 }

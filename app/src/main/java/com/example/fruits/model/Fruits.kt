@@ -2,6 +2,26 @@ package com.example.fruits.model
 
 object mockedFruits {
     val initialFruits = arrayListOf(
+        Fruit(name = "Grape", imageBase64 = "",
+            benefits = "Grapes are very healthy. Their high antioxidant content is what makes them stand out.\n" +
+                    "The anthocyanins and resveratrol in grapes have both been shown to reduce inflammation.\n" +
+                    "Also, animal studies suggest that the plant compounds in grapes may help protect your heart, eyes, joints and brain.\n" +
+                    "Red and purple grapes are rich in nutrients and other plant compounds that can decrease inflammation and lower your risk of disease."),
+        Fruit(name = "Grape", imageBase64 = "",
+            benefits = "Grapes are very healthy. Their high antioxidant content is what makes them stand out.\n" +
+                    "The anthocyanins and resveratrol in grapes have both been shown to reduce inflammation.\n" +
+                    "Also, animal studies suggest that the plant compounds in grapes may help protect your heart, eyes, joints and brain.\n" +
+                    "Red and purple grapes are rich in nutrients and other plant compounds that can decrease inflammation and lower your risk of disease."),
+        Fruit(name = "Grape", imageBase64 = "",
+            benefits = "Grapes are very healthy. Their high antioxidant content is what makes them stand out.\n" +
+                    "The anthocyanins and resveratrol in grapes have both been shown to reduce inflammation.\n" +
+                    "Also, animal studies suggest that the plant compounds in grapes may help protect your heart, eyes, joints and brain.\n" +
+                    "Red and purple grapes are rich in nutrients and other plant compounds that can decrease inflammation and lower your risk of disease."),
+        Fruit(name = "Grape", imageBase64 = "",
+            benefits = "Grapes are very healthy. Their high antioxidant content is what makes them stand out.\n" +
+                    "The anthocyanins and resveratrol in grapes have both been shown to reduce inflammation.\n" +
+                    "Also, animal studies suggest that the plant compounds in grapes may help protect your heart, eyes, joints and brain.\n" +
+                    "Red and purple grapes are rich in nutrients and other plant compounds that can decrease inflammation and lower your risk of disease."),
         Fruit(name = "Apple", imageBase64 = "",
             benefits = "Apples are among the most popular fruits, and also happen to be incredibly nutritious.\n" +
                 "They contain a high amount of fiber, vitamin C, potassium and vitamin K. They also provide some B vitamins.\n" +
@@ -10,13 +30,6 @@ object mockedFruits {
                 "Another notable health benefit of apples is their pectin content.\n" +
                 "Pectin is a prebiotic fiber that feeds the good bacteria in your gut and helps improve digestion and metabolic health.\n" +
                 "Apples are very nutritious. Their nutrients, antioxidants and fiber may reduce the risk of disease and improve digestion."),
-        Fruit(name = "Avocado", imageBase64 = "",
-            benefits = "Avocado is different from most other fruits.\n" +
-                "Most fruits are high in carbs, while avocado is low in carbs and comprised mainly of healthy fats.\n" +
-                "The majority of the fat in avocado is oleic acid, a monounsaturated fat linked to reduced inflammation and better heart health.\n" +
-                "In addition to healthy fats, avocados are loaded with potassium, fiber and magnesium (11).\n" +
-                "One whole avocado provides 28% of the RDI for potassium. Adequate potassium intake is associated with reduced blood pressure and a lower risk of stroke.\n" +
-                "Avocados are rich in healthy fats and potassium, both of which are well known for their role in promoting heart health."),
         Fruit(name = "Banana", imageBase64 = "",
             benefits = "Bananas are rich in vitamins and minerals and have quite a few health benefits to offer.\n" +
                 "They are well known for being high in potassium. One medium banana provides 12% of the RDI for this mineral (67).\n" +
@@ -42,11 +55,13 @@ object mockedFruits {
                 "Melatonin is a hormone that signals your brain when it’s time to sleep. It may help treat insomnia and other sleep disorders.\n" +
                 "One study concluded that the melatonin content in tart cherry juice enhanced sleep duration and quality.\n" +
                 "Cherries are rich in nutrients and antioxidants. They also contain melatonin, which may improve the quality of your sleep."),
-        Fruit(name = "Grape", imageBase64 = "",
-            benefits = "Grapes are very healthy. Their high antioxidant content is what makes them stand out.\n" +
-                "The anthocyanins and resveratrol in grapes have both been shown to reduce inflammation.\n" +
-                "Also, animal studies suggest that the plant compounds in grapes may help protect your heart, eyes, joints and brain.\n" +
-                "Red and purple grapes are rich in nutrients and other plant compounds that can decrease inflammation and lower your risk of disease."),
+        Fruit(name = "Avocado", imageBase64 = "",
+            benefits = "Avocado is different from most other fruits.\n" +
+                    "Most fruits are high in carbs, while avocado is low in carbs and comprised mainly of healthy fats.\n" +
+                    "The majority of the fat in avocado is oleic acid, a monounsaturated fat linked to reduced inflammation and better heart health.\n" +
+                    "In addition to healthy fats, avocados are loaded with potassium, fiber and magnesium (11).\n" +
+                    "One whole avocado provides 28% of the RDI for potassium. Adequate potassium intake is associated with reduced blood pressure and a lower risk of stroke.\n" +
+                    "Avocados are rich in healthy fats and potassium, both of which are well known for their role in promoting heart health."),
         Fruit(name = "Guava", imageBase64 = "",
             benefits = "Guava has a remarkable nutrition profile.\n" +
                 "Eating just one ounce (28 grams) of guava will give you 107% of the RDI for vitamin C (80).\n" +
