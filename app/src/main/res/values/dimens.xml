@@ -5,4 +5,5 @@
     <dimen name="image_item_fruit_size">128dp</dimen>
     <dimen name="image_item_fruit_size_detail">256dp</dimen>
     <dimen name="margin_small">8dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
 </resources>

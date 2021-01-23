@@ -8,24 +8,34 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_default">
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:src="@android:drawable/ic_input_add"
             android:id="@+id/fruit_image"
             android:layout_width="@dimen/image_item_fruit_size"
             android:layout_height="@dimen/image_item_fruit_size"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginLeft="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:layout_marginRight="@dimen/margin_big"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fruit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginLeft="@dimen/margin_big"
             android:layout_marginTop="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:layout_marginRight="@dimen/margin_big"
             app:errorEnabled="true"
             app:layout_constraintTop_toBottomOf="@id/fruit_image">
 
@@ -41,7 +51,11 @@
             android:id="@+id/fruit_benefits"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginLeft="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:layout_marginRight="@dimen/margin_big"
             app:errorEnabled="true"
             app:layout_constraintTop_toBottomOf="@id/fruit_name">
 
@@ -58,7 +72,11 @@
             android:id="@+id/add_fruit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginLeft="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:layout_marginRight="@dimen/margin_big"
             android:text="@string/add_fruit"
             app:layout_constraintTop_toBottomOf="@id/fruit_benefits" />
 

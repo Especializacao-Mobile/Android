@@ -8,27 +8,34 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_default" >
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/fruit_image"
             android:layout_width="0dp"
             android:layout_height="@dimen/image_item_fruit_size_detail"
-            android:scaleType="centerCrop"
             android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginLeft="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_default"
             android:layout_marginEnd="@dimen/margin_big"
+            android:layout_marginRight="@dimen/margin_big"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginRight="@dimen/margin_big"
-            android:layout_marginLeft="@dimen/margin_big" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/fruit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginLeft="@dimen/margin_big"
             android:layout_marginTop="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:layout_marginRight="@dimen/margin_big"
+            android:justificationMode="inter_word"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
             app:errorEnabled="true"
             app:layout_constraintTop_toBottomOf="@id/fruit_image"
@@ -38,7 +45,12 @@
             android:id="@+id/fruit_benefits"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginLeft="@dimen/margin_big"
             android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:layout_marginRight="@dimen/margin_big"
+            android:justificationMode="inter_word"
             app:errorEnabled="true"
             app:layout_constraintTop_toBottomOf="@id/fruit_name"
             tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
@@ -47,7 +59,11 @@
             android:id="@+id/remove_fruit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_big"
+            android:layout_marginLeft="@dimen/margin_big"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_big"
+            android:layout_marginRight="@dimen/margin_big"
             android:text="@string/remove_fruit"
             app:layout_constraintTop_toBottomOf="@id/fruit_benefits" />
 

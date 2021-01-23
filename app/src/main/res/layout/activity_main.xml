@@ -6,10 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.home.MainActivity">
 
+    <include
+        layout="@layout/toolbar"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fruits"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         tools:listitem="@layout/fruits_item"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

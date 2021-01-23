@@ -9,4 +9,5 @@
     <string name="add_fruit">add fruit</string>
     <string name="error_empty_name">Empty Name!</string>
     <string name="error_empty_benefits">Empty Benefits!</string>
+    <string name="action_filter">Filter</string>
 </resources>
