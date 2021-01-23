@@ -32,9 +32,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         toolbarBinding = ToolbarBinding.bind(binding.root)
         setContentView(binding.root)
-        setSupportActionBar(toolbarBinding.toolbar)
+        setUpView()
         setUpRecyclerView()
         setUpFloatListener()
+    }
+
+    private fun setUpView() {
+        setSupportActionBar(toolbarBinding.toolbar)
+        supportActionBar?.title = getString(R.string.fruits_list)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -45,7 +50,9 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         fruits.clear()
-        fruits.addAll(savedInstanceState.getParcelableArrayList(MAIN_LIST_STATE) ?: mockedFruits.initialFruits)
+        fruits.addAll(
+            savedInstanceState.getParcelableArrayList(MAIN_LIST_STATE) ?: mockedFruits.initialFruits
+        )
         fruitAdapter.notifyDataSetChanged()
     }
 

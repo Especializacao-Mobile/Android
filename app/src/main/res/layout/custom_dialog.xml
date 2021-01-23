@@ -1,8 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/margin_default">
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/repeated_fruit_should_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/should_show_repeated_fruits"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/choose_order_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+        android:text="@string/choose_an_order_to_show_the_fruits_list"
+        app:layout_constraintTop_toBottomOf="@id/repeated_fruit_should_show"
+        />
+
+    <RadioGroup
+        android:id="@+id/choose_order"
+        app:layout_constraintTop_toBottomOf="@id/choose_order_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="alphabetic" />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Insert" />
+
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

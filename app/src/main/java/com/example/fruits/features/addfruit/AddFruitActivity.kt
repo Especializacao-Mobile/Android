@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.example.fruits.R
 import com.example.fruits.databinding.ActivityAddFruitBinding
+import com.example.fruits.databinding.ToolbarBinding
 import com.example.fruits.extensions.convertToBase64
 import com.example.fruits.extensions.convertToBitmap
 import com.example.fruits.features.home.MainActivity
@@ -20,6 +21,7 @@ import java.io.InputStream
 class AddFruitActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddFruitBinding
+    private lateinit var toolbarBinding: ToolbarBinding
     private val phoneImagePickerType = "image/*"
     private val savedInstanceFruit = "fruit"
     private var fruit = Fruit()
@@ -27,9 +29,18 @@ class AddFruitActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddFruitBinding.inflate(layoutInflater)
+        toolbarBinding = ToolbarBinding.bind(binding.root)
         setContentView(binding.root)
+        setUpView()
         setUpChangeListener()
         setUpClickListeners()
+    }
+
+    private fun setUpView() {
+        setSupportActionBar(toolbarBinding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.title = getString(R.string.add_fruit_activity_title)
     }
 
     override fun onActivityResult(reqCode: Int, resultCode: Int, data: Intent?) {
