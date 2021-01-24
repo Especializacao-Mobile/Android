@@ -42,8 +42,6 @@ class FruitAdapter(
 
         return object : Filter() {
 
-            private val auxSearchableList: MutableList<Fruit> = mutableListOf()
-
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val results = FilterResults()
                 results.values = getFilteredResults(constraint.toString())
@@ -56,8 +54,8 @@ class FruitAdapter(
 
             private fun getFilteredResults(constraint: String): List<Fruit> {
                 if (constraint == MainActivity.NONE) {
-                    clearAdd(fruitsFiltered, elements)
-                    clearAdd(auxSearchableList, fruitsFiltered)
+                    fruitsFiltered.clear()
+                    fruitsFiltered.addAll(elements)
                     sortedList = false
                 } else if (constraint == MainActivity.SORTED_ALPHABETICALLY) {
                     fruitsFiltered.sortBy { it.name }
@@ -65,19 +63,14 @@ class FruitAdapter(
                 } else if (constraint == MainActivity.REMOVE_DUPLICATED) {
                     val newList = ArrayList<Fruit>()
                     newList.addAll(fruitsFiltered.distinct())
-                    clearAdd(fruitsFiltered, newList)
-                    clearAdd(auxSearchableList, fruitsFiltered)
-                } else if (constraint != MainActivity.NONE && constraint != MainActivity.SORTED_ALPHABETICALLY && constraint!= MainActivity.REMOVE_DUPLICATED){
-                    if (constraint.isNotEmpty()){
-                        return auxSearchableList.filter { it.name?.contains(constraint) == true || it.benefits?.contains(constraint) == true}
-                    }
+                    fruitsFiltered.clear()
+                    fruitsFiltered.addAll(newList)
                 }
                 return fruitsFiltered
             }
 
-            private fun clearAdd(clear: MutableList<Fruit>, add: List<Fruit>){
-                clear.clear()
-                clear.addAll(add)
+            private fun fillAuxSearchable(){
+
             }
         }
     }

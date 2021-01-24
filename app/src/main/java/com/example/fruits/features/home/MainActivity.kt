@@ -110,11 +110,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        R.id.action_search -> {
-            //TODO get text from search_src_text and filter
-            true
-        }
-
         else -> {
             // If we got here, the user's action was not recognized.
             // Invoke the superclass to handle it.
