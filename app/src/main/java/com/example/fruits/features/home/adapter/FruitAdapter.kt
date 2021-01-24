@@ -17,6 +17,7 @@ class FruitAdapter(
 
     private lateinit var binding: FruitsItemBinding
     private val fruitsFiltered: MutableList<Fruit> = mutableListOf()
+    private var sortedList = false
 
     init {
         fruitsFiltered.addAll(elements)
@@ -31,43 +32,43 @@ class FruitAdapter(
         holder.bind(fruitsFiltered[position], listener)
     }
 
+    fun isDistinct() = elements.size != fruitsFiltered.size
+
+    fun isSortedAlphabetically() = sortedList
+
     override fun getItemCount(): Int = fruitsFiltered.size
 
     override fun getFilter(): Filter {
+
         return object : Filter() {
+
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val filteredResults: List<Fruit> = if (constraint == MainActivity.NONE) {
-                    elements
-                } else {
-                    getFilteredResults(constraint.toString())
-                }
                 val results = FilterResults()
-                results.values = filteredResults
+                results.values = getFilteredResults(constraint.toString())
                 return results
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                fruitsFiltered.clear()
-                results?.values?.let {
-                    if (it is List<*> && it.isNotEmpty()) {
-                        if (it[0] is Fruit){
-                            fruitsFiltered.addAll(it as List<Fruit>)
-                        }
-                    }
-                }
                 notifyDataSetChanged()
             }
 
             private fun getFilteredResults(constraint: String): List<Fruit> {
-                val results = ArrayList<Fruit>()
+                if (constraint == MainActivity.NONE) {
+                    fruitsFiltered.clear()
+                    fruitsFiltered.addAll(elements)
+                    sortedList = false
+                }
                 if (constraint == MainActivity.SORTED_ALPHABETICALLY) {
-                    results.addAll(elements)
-                    results.sortBy { it.name }
+                    fruitsFiltered.sortBy { it.name }
+                    sortedList = true
                 }
                 if (constraint == MainActivity.REMOVE_DUPLICATED) {
-                    results.addAll(elements.distinct())
+                    val newList = ArrayList<Fruit>()
+                    newList.addAll(fruitsFiltered.distinct())
+                    fruitsFiltered.clear()
+                    fruitsFiltered.addAll(newList)
                 }
-                return results
+                return fruitsFiltered
             }
         }
     }

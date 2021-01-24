@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SwitchCompat
@@ -73,21 +72,24 @@ class MainActivity : AppCompatActivity() {
         R.id.action_filter -> {
             val builder = AlertDialog.Builder(this)
             val view = layoutInflater.inflate(R.layout.custom_dialog, null)
-            val duplicated = view.findViewById<SwitchCompat>(R.id.repeated_fruit_should_show)
-            //val sortedOrderGroup = view.findViewById<RadioGroup>(R.id.radio_group_choose_order)
+            val showDuplicated = view.findViewById<SwitchCompat>(R.id.repeated_fruit_should_show)
             val sortedAlphabetic = view.findViewById<RadioButton>(R.id.radio_alphabetic)
-            //val sortedInsert = view.findViewById<RadioButton>(R.id.radio_insert)
-
+            val sortedInsert = view.findViewById<RadioButton>(R.id.radio_insert)
 
             builder.apply {
                 setView(view)
-                setPositiveButton("Filter") { dialog, _ ->
-                    if (duplicated.isChecked || sortedAlphabetic.isActivated){
-                        if (sortedAlphabetic.isActivated) {
-                            fruitAdapter.filter.filter(SORTED_ALPHABETICALLY)
-                        }
-                        if (duplicated.isChecked) {
+                showDuplicated.isChecked = !fruitAdapter.isDistinct()
+                sortedInsert.isChecked = !fruitAdapter.isSortedAlphabetically()
+                sortedAlphabetic.isChecked = fruitAdapter.isSortedAlphabetically()
+                setPositiveButton(getString(R.string.filter)) { dialog, _ ->
+                    if (!showDuplicated.isChecked || sortedAlphabetic.isChecked){
+                        if (showDuplicated.isChecked) {
+                            fruitAdapter.filter.filter(NONE)
+                        } else {
                             fruitAdapter.filter.filter(REMOVE_DUPLICATED)
+                        }
+                        if (sortedAlphabetic.isChecked) {
+                            fruitAdapter.filter.filter(SORTED_ALPHABETICALLY)
                         }
                     } else {
                         fruitAdapter.filter.filter(NONE)
