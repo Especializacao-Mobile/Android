@@ -42,6 +42,8 @@ class FruitAdapter(
 
         return object : Filter() {
 
+            private val auxSearchableList: MutableList<Fruit> = mutableListOf()
+
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val results = FilterResults()
                 results.values = getFilteredResults(constraint.toString())
@@ -54,21 +56,28 @@ class FruitAdapter(
 
             private fun getFilteredResults(constraint: String): List<Fruit> {
                 if (constraint == MainActivity.NONE) {
-                    fruitsFiltered.clear()
-                    fruitsFiltered.addAll(elements)
+                    clearAdd(fruitsFiltered, elements)
+                    clearAdd(auxSearchableList, fruitsFiltered)
                     sortedList = false
-                }
-                if (constraint == MainActivity.SORTED_ALPHABETICALLY) {
+                } else if (constraint == MainActivity.SORTED_ALPHABETICALLY) {
                     fruitsFiltered.sortBy { it.name }
                     sortedList = true
-                }
-                if (constraint == MainActivity.REMOVE_DUPLICATED) {
+                } else if (constraint == MainActivity.REMOVE_DUPLICATED) {
                     val newList = ArrayList<Fruit>()
                     newList.addAll(fruitsFiltered.distinct())
-                    fruitsFiltered.clear()
-                    fruitsFiltered.addAll(newList)
+                    clearAdd(fruitsFiltered, newList)
+                    clearAdd(auxSearchableList, fruitsFiltered)
+                } else if (constraint != MainActivity.NONE && constraint != MainActivity.SORTED_ALPHABETICALLY && constraint!= MainActivity.REMOVE_DUPLICATED){
+                    if (constraint.isNotEmpty()){
+                        return auxSearchableList.filter { it.name?.contains(constraint) == true || it.benefits?.contains(constraint) == true}
+                    }
                 }
                 return fruitsFiltered
+            }
+
+            private fun clearAdd(clear: MutableList<Fruit>, add: List<Fruit>){
+                clear.clear()
+                clear.addAll(add)
             }
         }
     }

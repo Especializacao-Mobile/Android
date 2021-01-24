@@ -2,14 +2,21 @@ package com.example.fruits.features.home
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.view.MenuItemCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruits.R
 import com.example.fruits.databinding.ActivityMainBinding
@@ -20,6 +27,7 @@ import com.example.fruits.features.fruitdetails.FruitDetailsActivity.Companion.F
 import com.example.fruits.features.home.adapter.FruitAdapter
 import com.example.fruits.model.Fruit
 import com.example.fruits.model.mockedFruits
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -82,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                 sortedInsert.isChecked = !fruitAdapter.isSortedAlphabetically()
                 sortedAlphabetic.isChecked = fruitAdapter.isSortedAlphabetically()
                 setPositiveButton(getString(R.string.filter)) { dialog, _ ->
-                    if (!showDuplicated.isChecked || sortedAlphabetic.isChecked){
+                    if (!showDuplicated.isChecked || sortedAlphabetic.isChecked) {
                         if (showDuplicated.isChecked) {
                             fruitAdapter.filter.filter(NONE)
                         } else {
@@ -99,6 +107,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             builder.create().show()
+            true
+        }
+
+        R.id.action_search -> {
+            //TODO get text from search_src_text and filter
             true
         }
 
@@ -172,6 +185,6 @@ class MainActivity : AppCompatActivity() {
         const val FRUIT_TO_REMOVE = "fruit_to_remove"
         const val REMOVE_DUPLICATED = "remove_duplicated"
         const val SORTED_ALPHABETICALLY = "sorted_alphabetically"
-        const val NONE = ""
+        const val NONE = "NONE"
     }
 }
