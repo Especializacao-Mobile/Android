@@ -1,22 +1,16 @@
 package com.example.fruits.features.home
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
-import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.view.MenuItemCompat
-import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fruits.R
 import com.example.fruits.databinding.ActivityMainBinding
@@ -68,12 +62,17 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == MAIN_ACTIVITY_ADD_FRUIT_REQUEST_CODE) {
-                addFruitToList(data)
-            } else if (requestCode == MAIN_ACTIVITY_DETAILS_REQUEST_CODE) {
-                removeFruitFromList(data)
-            }
+            callWhenResultOk(requestCode, data)
         }
+    }
+
+    private fun callWhenResultOk(requestCode: Int, data: Intent?) {
+        if (requestCode == MAIN_ACTIVITY_ADD_FRUIT_REQUEST_CODE) {
+            addFruitToList(data)
+        } else if (requestCode == MAIN_ACTIVITY_DETAILS_REQUEST_CODE) {
+            removeFruitFromList(data)
+        }
+        fruitAdapter.filter.filter(NONE)
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
@@ -86,26 +85,20 @@ class MainActivity : AppCompatActivity() {
 
             builder.apply {
                 setView(view)
-                showDuplicated.isChecked = !fruitAdapter.isDistinct()
+                showDuplicated.isChecked = !fruitAdapter.isDistinctSize()
                 sortedInsert.isChecked = !fruitAdapter.isSortedAlphabetically()
                 sortedAlphabetic.isChecked = fruitAdapter.isSortedAlphabetically()
                 setPositiveButton(getString(R.string.filter)) { dialog, _ ->
-                    if (!showDuplicated.isChecked || sortedAlphabetic.isChecked) {
-                        if (showDuplicated.isChecked) {
-                            fruitAdapter.filter.filter(NONE)
-                        } else {
-                            fruitAdapter.filter.filter(REMOVE_DUPLICATED)
-                        }
-                        if (sortedAlphabetic.isChecked) {
-                            fruitAdapter.filter.filter(SORTED_ALPHABETICALLY)
-                        }
-                    } else {
-                        fruitAdapter.filter.filter(NONE)
+                    fruitAdapter.filter.filter(NONE)
+                    if (sortedAlphabetic.isChecked) {
+                        fruitAdapter.filter.filter(SORTED_ALPHABETICALLY)
+                    }
+                    if (!showDuplicated.isChecked) {
+                        fruitAdapter.filter.filter(REMOVE_DUPLICATED)
                     }
                     dialog.dismiss()
                 }
             }
-
             builder.create().show()
             true
         }
