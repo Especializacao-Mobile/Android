@@ -7,7 +7,7 @@ import com.example.galleryexercise.viewholder.GalleyItemViewHolder
 import com.example.galleryexercise.model.Image
 import com.example.galleryexercise.databinding.GalleryItemBinding
 
-class GalleryAdapter(private val items: List<Image>) :
+class GalleryAdapter(private val items: List<Image>, private val listener: (image: Image) -> Unit) :
     RecyclerView.Adapter<GalleyItemViewHolder>() {
 
     private lateinit var binding: GalleryItemBinding
@@ -18,7 +18,7 @@ class GalleryAdapter(private val items: List<Image>) :
     }
 
     override fun onBindViewHolder(holder: GalleyItemViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], listener)
     }
 
     override fun getItemCount() = items.size

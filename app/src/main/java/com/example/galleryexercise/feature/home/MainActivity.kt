@@ -2,6 +2,7 @@ package com.example.galleryexercise.feature.home
 
 import android.Manifest
 import android.content.ContentUris
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.MediaStore
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.galleryexercise.R
 import com.example.galleryexercise.adapter.GalleryAdapter
 import com.example.galleryexercise.databinding.ActivityMainBinding
+import com.example.galleryexercise.feature.delete.DeleteActivity
 import com.example.galleryexercise.model.Image
 
 
@@ -34,13 +36,24 @@ class MainActivity : AppCompatActivity() {
     private fun setUpListeners(){
         binding.btnRequestPermission.setOnClickListener {
             requestRead()
+            requestWrite()
         }
+    }
+
+    override fun onResume() {
+        requestRead()
+        requestWrite()
+        super.onResume()
     }
 
     private fun setUpRecyclerView() {
         switchVisibilities(true)
         images = getImages() as ArrayList<Image>
-        imagesAdapter = GalleryAdapter(images)
+        imagesAdapter = GalleryAdapter(images){
+            val intent = Intent(this, DeleteActivity::class.java)
+            intent.putExtra(DeleteActivity.IMAGE, it)
+            startActivity(intent)
+        }
         binding.listGallery.adapter = imagesAdapter
         binding.listGallery.layoutManager = GridLayoutManager(this, 2)
     }
@@ -60,6 +73,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val MAIN_LIST_STATE = "MAIN_LIST_STATE"
         const val MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1
+        const val MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1
     }
 
     private fun getImages(): List<Image> {
@@ -106,6 +120,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun requestWrite() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+            )
+        } else {
+            setUpRecyclerView()
+        }
+    }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -115,6 +141,9 @@ class MainActivity : AppCompatActivity() {
                 switchVisibilities()
             }
             return
+        }
+        if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE) {
+            Toast.makeText(this, getString(R.string.not_possible_to_delete) , Toast.LENGTH_SHORT).show()
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
