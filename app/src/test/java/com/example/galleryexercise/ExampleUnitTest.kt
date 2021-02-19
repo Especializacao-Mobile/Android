@@ -1,4 +1,4 @@
-package com.example.galeryexercise
+package com.example.galleryexercise
 
 import org.junit.Test
 
