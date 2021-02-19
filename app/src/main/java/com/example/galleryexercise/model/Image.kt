@@ -1,4 +1,4 @@
-package com.example.galleryexercise
+package com.example.galleryexercise.model
 
 import android.net.Uri
 

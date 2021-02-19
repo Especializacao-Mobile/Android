@@ -1,6 +1,7 @@
-package com.example.galleryexercise
+package com.example.galleryexercise.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
+import com.example.galleryexercise.model.Image
 import com.example.galleryexercise.databinding.GalleryItemBinding
 
 class GalleyItemViewHolder(private val binding: GalleryItemBinding) :

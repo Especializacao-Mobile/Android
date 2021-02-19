@@ -1,8 +1,10 @@
-package com.example.galleryexercise
+package com.example.galleryexercise.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.galleryexercise.viewholder.GalleyItemViewHolder
+import com.example.galleryexercise.model.Image
 import com.example.galleryexercise.databinding.GalleryItemBinding
 
 class GalleryAdapter(private val items: List<Image>) :
