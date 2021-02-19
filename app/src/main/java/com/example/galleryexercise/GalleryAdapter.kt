@@ -1,12 +1,11 @@
 package com.example.galleryexercise
 
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.galleryexercise.databinding.GalleryItemBinding
 
-class GalleryAdapter(private val items: List<MediaStore.Images>) :
+class GalleryAdapter(private val items: List<Image>) :
     RecyclerView.Adapter<GalleyItemViewHolder>() {
 
     private lateinit var binding: GalleryItemBinding

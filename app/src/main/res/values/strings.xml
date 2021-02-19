@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Galery Exercise</string>
+    <string name="app_name">Gallery Exercise</string>
+    <string name="access_denied">We could not have access to your images!</string>
+    <string name="request_permission">Request Permission</string>
 </resources>
