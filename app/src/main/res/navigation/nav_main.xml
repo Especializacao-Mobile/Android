@@ -2,21 +2,22 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_main">
+    android:id="@+id/nav_main"
+    app:startDestination="@id/search">
 
     <fragment
         android:id="@+id/search"
-        android:name="br.imaginefree.weather.SearchFragment"
+        android:name="br.imaginefree.weather.features.SearchFragment"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/favorites"
-        android:name="br.imaginefree.weather.FavoritesFragment"
+        android:name="br.imaginefree.weather.features.FavoritesFragment"
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/settings"
-        android:name="br.imaginefree.weather.SettingsFragment"
+        android:name="br.imaginefree.weather.features.SettingsFragment"
         tools:layout="@layout/fragment_settings" />
 
     <action
