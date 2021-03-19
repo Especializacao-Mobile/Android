@@ -4,7 +4,9 @@ buildscript {
         kotlin_version = "1.4.31"
         retrofit_version = "2.9.0"
         navigation_args = "2.2.2"
-        navigation="2.2.0"
+        navigation="2.3.4"
+        coil_version = "1.1.1"
+        room_version = "2.2.6"
     }
 
 
