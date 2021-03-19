@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main">
+
+    <fragment
+        android:id="@+id/search"
+        android:name="br.imaginefree.weather.SearchFragment"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/favorites"
+        android:name="br.imaginefree.weather.FavoritesFragment"
+        tools:layout="@layout/fragment_favorites" />
+
+    <fragment
+        android:id="@+id/settings"
+        android:name="br.imaginefree.weather.SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+
+    <action
+        android:id="@+id/go_to_search"
+        app:destination="@id/search" />
+
+    <action
+        android:id="@+id/go_to_favorites"
+        app:destination="@id/favorites" />
+
+    <action
+        android:id="@+id/go_to_settings"
+        app:destination="@id/settings" />
+
+</navigation>
