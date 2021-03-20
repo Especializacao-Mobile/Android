@@ -68,6 +68,9 @@ dependencies {
     // optional - RxJava support for Room
     //implementation "androidx.room:room-rxjava2:$room_version"
 
+    //Jetpack Security
+    implementation "androidx.security:security-crypto:1.1.0-alpha03"
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

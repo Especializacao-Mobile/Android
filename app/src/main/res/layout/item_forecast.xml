@@ -55,10 +55,10 @@
             tools:text="ºC" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:src="@drawable/ic_launcher_background"
+            android:src="@drawable/ic_umbrella"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatTextView
