@@ -11,6 +11,7 @@ import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.model.Forecast
 import br.imaginefree.weather.data.network.Service
 import br.imaginefree.weather.databinding.ActivityForecastBinding
+import br.imaginefree.weather.features.adapter.AdapterType
 import br.imaginefree.weather.features.adapter.CityAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -32,7 +33,7 @@ class ForecastActivity : AppCompatActivity() {
         getForecast(city?.cityId)
         binding.favorite
 
-        cityAdapter = CityAdapter(forecastList, null, true)
+        cityAdapter = CityAdapter(forecastList, AdapterType.FORECAST)
         binding.forecastList.adapter = cityAdapter
         binding.forecastList.layoutManager = LinearLayoutManager(this)
 

@@ -13,6 +13,7 @@ import br.imaginefree.weather.data.model.BaseResponse
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.network.Service
 import br.imaginefree.weather.databinding.FragmentCityBinding
+import br.imaginefree.weather.features.adapter.AdapterType
 import br.imaginefree.weather.features.adapter.CityAdapter
 import br.imaginefree.weather.features.forecast.ForecastActivity
 import retrofit2.Call
@@ -32,7 +33,7 @@ class CityFragment : Fragment(R.layout.fragment_city){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cityAdapter = CityAdapter(cities, ::startForecastActivity)
+        cityAdapter = CityAdapter(cities, AdapterType.SEARCH, ::startForecastActivity)
         binding.weatherList.adapter = cityAdapter
         binding.weatherList.layoutManager = LinearLayoutManager(requireContext())
         binding.btnSearch.setOnClickListener {
