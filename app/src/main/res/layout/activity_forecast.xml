@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:padding="8dp"
     android:layout_height="match_parent"
-    tools:context=".features.ForecastActivity">
+    tools:context=".features.forecast.ForecastActivity">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/place"

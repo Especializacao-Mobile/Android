@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/search"
-        android:name="br.imaginefree.weather.features.SearchFragment"
+        android:name="br.imaginefree.weather.features.search.SearchFragment"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/favorites"
-        android:name="br.imaginefree.weather.features.FavoritesFragment"
+        android:name="br.imaginefree.weather.features.favorite.FavoritesFragment"
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/settings"
-        android:name="br.imaginefree.weather.features.SettingsFragment"
+        android:name="br.imaginefree.weather.features.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings" />
 
     <action

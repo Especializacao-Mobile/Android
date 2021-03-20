@@ -1,4 +1,4 @@
-package br.imaginefree.weather.features
+package br.imaginefree.weather.features.favorite
 
 import android.os.Bundle
 import android.util.Log

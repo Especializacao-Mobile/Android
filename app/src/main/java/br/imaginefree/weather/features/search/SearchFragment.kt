@@ -1,4 +1,4 @@
-package br.imaginefree.weather.features
+package br.imaginefree.weather.features.search
 
 import androidx.fragment.app.Fragment
 import br.imaginefree.weather.R

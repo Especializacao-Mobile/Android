@@ -1,4 +1,4 @@
-package br.imaginefree.weather.features
+package br.imaginefree.weather.features.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
