@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/search"
-        android:name="br.imaginefree.weather.features.search.SearchFragment"
-        tools:layout="@layout/fragment_search" />
+        android:name="br.imaginefree.weather.features.search.CityFragment"
+        tools:layout="@layout/fragment_city" />
 
     <fragment
         android:id="@+id/favorites"
@@ -22,14 +22,20 @@
 
     <action
         android:id="@+id/go_to_search"
-        app:destination="@id/search" />
+        app:destination="@id/search"
+        app:popUpTo="@id/search"
+        app:popUpToInclusive="true" />
 
     <action
         android:id="@+id/go_to_favorites"
-        app:destination="@id/favorites" />
+        app:destination="@id/favorites"
+        app:popUpTo="@id/favorites"
+        app:popUpToInclusive="true" />
 
     <action
         android:id="@+id/go_to_settings"
-        app:destination="@id/settings" />
+        app:destination="@id/settings"
+        app:popUpTo="@id/settings"
+        app:popUpToInclusive="true" />
 
 </navigation>

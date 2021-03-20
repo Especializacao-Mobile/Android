@@ -15,7 +15,7 @@
         android:padding="16dp">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/city"
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,7 +28,7 @@
             android:id="@+id/sky"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/city"
+            app:layout_constraintTop_toBottomOf="@id/time"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_margin="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"

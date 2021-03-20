@@ -4,9 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".features.search.SearchFragment">
+    tools:context=".features.search.CityFragment">
 
     <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/search_field"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@id/btn_search"
@@ -32,6 +33,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/item_weather" />
+        tools:listitem="@layout/item_city" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

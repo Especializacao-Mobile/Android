@@ -2,6 +2,7 @@ package br.imaginefree.weather.data.network
 
 import br.imaginefree.weather.data.model.BaseResponse
 import br.imaginefree.weather.data.model.City
+import br.imaginefree.weather.data.model.Forecast
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -26,6 +27,6 @@ interface Api {
     fun getForecast(
         @Query("id") id: Long,
         @Query("apiKey") apiKey: String,
-    ): Call<BaseResponse<City>>
+    ): Call<BaseResponse<Forecast>>
 
 }

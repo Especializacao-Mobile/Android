@@ -1,6 +1,9 @@
 package br.imaginefree.weather.data.model
 
-class Cloud {
-    val all: Int
-        get() { return all }
-}
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+class Cloud(
+    val all: Double
+): Parcelable

@@ -37,14 +37,17 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         when (item.itemId) {
             R.id.search -> {
                 navController.navigate(R.id.go_to_search)
+                return true
             }
             R.id.favorites -> {
                 navController.navigate(R.id.go_to_favorites)
+                return true
             }
             R.id.settings -> {
                 navController.navigate(R.id.go_to_settings)
+                return true
             }
         }
-        return true
+        return false
     }
 }
