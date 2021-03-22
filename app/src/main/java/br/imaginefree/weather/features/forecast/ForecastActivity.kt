@@ -3,9 +3,11 @@ package br.imaginefree.weather.features.forecast
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.imaginefree.weather.R
+import br.imaginefree.weather.data.local.AppDatabase
 import br.imaginefree.weather.data.model.BaseResponse
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.model.Forecast
@@ -16,6 +18,7 @@ import br.imaginefree.weather.features.adapter.CityAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.concurrent.thread
 
 class ForecastActivity : AppCompatActivity() {
 
@@ -31,14 +34,20 @@ class ForecastActivity : AppCompatActivity() {
         binding.place.text = city!!.name
         binding.temperature.text = city.main.temp.toString()
         getForecast(city.cityId)
-        binding.favorite
+        binding.favorite.setOnClickListener {
+            city.favorite = true
+            thread {
+                AppDatabase.getInstance(this)?.cityDao()?.insert(city)
+                runOnUiThread { Toast.makeText(this, "Saved Successfully!", Toast.LENGTH_LONG).show() }
+            }
+        }
 
         cityAdapter = CityAdapter(forecastList, AdapterType.FORECAST)
         binding.forecastList.adapter = cityAdapter
         binding.forecastList.layoutManager = LinearLayoutManager(this)
     }
 
-    private fun getForecast(cityId: Int?) {
+    private fun getForecast(cityId: Long?) {
         cityId?.let {
             Service
                     .getService()

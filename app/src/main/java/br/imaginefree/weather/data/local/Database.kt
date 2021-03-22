@@ -13,7 +13,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun cityDao(): CityDao
 
     companion object {
-        var INSTANCE: AppDatabase? = null
+        private var INSTANCE: AppDatabase? = null
 
         fun getInstance(context: Context): AppDatabase? {
             if (INSTANCE == null) {

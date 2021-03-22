@@ -12,8 +12,8 @@ import kotlinx.android.parcel.Parcelize
 data class Weather(
     @SerializedName("id")
     @PrimaryKey
-    var weatherId: Int = 0,
-    var weatherOwnerId: Int = 0,
+    var weatherId: Long = 0,
+    var weatherOwnerId: Long = 0,
     var main: String = "",
     var description: String = "",
     var icon: String = ""

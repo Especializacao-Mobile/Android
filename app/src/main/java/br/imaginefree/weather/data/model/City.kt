@@ -13,7 +13,7 @@ import kotlinx.android.parcel.Parcelize
 data class City(
         @SerializedName("id")
         @PrimaryKey
-        var cityId: Int = 0,
+        var cityId: Long = 0,
         var dt: Long = 0L,
         var name: String = "",
         @Embedded var main: Main = Main(),
