@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Sys(
-    val country: String?,
-    val pod: String?
+data class Sys(
+    var country: String = "",
+    var pod: String = ""
 ): Parcelable

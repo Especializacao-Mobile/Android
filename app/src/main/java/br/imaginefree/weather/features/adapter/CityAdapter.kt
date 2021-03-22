@@ -38,6 +38,7 @@ class CityAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as? ForecastViewHolder)?.bind(elements[position] as Forecast)
         (holder as? CityViewHolder)?.bind(elements[position] as City, listener!!)
+        (holder as? FavoriteViewHolder)?.bind(elements[position] as City, listener!!)
     }
 
     override fun getItemCount() = elements.size

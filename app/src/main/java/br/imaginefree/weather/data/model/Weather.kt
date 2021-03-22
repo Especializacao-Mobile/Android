@@ -4,16 +4,17 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity
-class Weather(
+data class Weather(
     @SerializedName("id")
     @PrimaryKey
-    val weatherId: Long,
-    val weatherOwnerId: Long,
-    val main: String,
-    val description: String,
-    val icon: String
+    var weatherId: Int = 0,
+    var weatherOwnerId: Int = 0,
+    var main: String = "",
+    var description: String = "",
+    var icon: String = ""
 ): Parcelable

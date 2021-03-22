@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Wind(
-    val speed: Double,
-    val deg: Double
+data class Wind(
+    var speed: Double = 0.0,
+    var deg: Double = 0.0
 ): Parcelable

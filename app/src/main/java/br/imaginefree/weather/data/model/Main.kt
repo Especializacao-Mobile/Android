@@ -4,11 +4,11 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Main(
-    val temp: Double,
-    val feels_like: Double,
-    val temp_min: Double,
-    val temp_max: Double,
-    val pressure: Double,
-    val humidity: Double
+data class Main(
+    var temp: Double = 0.0,
+    var feels_like: Double = 0.0,
+    var temp_min: Double = 0.0,
+    var temp_max: Double = 0.0,
+    var pressure: Double = 0.0,
+    var humidity: Double = 0.0
 ): Parcelable

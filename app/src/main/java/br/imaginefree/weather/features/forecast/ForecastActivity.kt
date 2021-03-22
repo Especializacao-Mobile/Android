@@ -29,17 +29,16 @@ class ForecastActivity : AppCompatActivity() {
         setContentView(binding.root)
         val city = intent.extras?.get("CITY") as? City
         binding.place.text = city!!.name
-        binding.temperature.text = city!!.main.temp.toString()
-        getForecast(city?.cityId)
+        binding.temperature.text = city.main.temp.toString()
+        getForecast(city.cityId)
         binding.favorite
 
         cityAdapter = CityAdapter(forecastList, AdapterType.FORECAST)
         binding.forecastList.adapter = cityAdapter
         binding.forecastList.layoutManager = LinearLayoutManager(this)
-
     }
 
-    private fun getForecast(cityId: Long?) {
+    private fun getForecast(cityId: Int?) {
         cityId?.let {
             Service
                     .getService()

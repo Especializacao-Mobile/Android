@@ -34,7 +34,7 @@ android {
         jvmTarget = '1.8'
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
 
@@ -52,6 +52,10 @@ dependencies {
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    //okhttp
+    implementation "com.squareup.okhttp3:logging-interceptor:$retrofit_logging"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp3"
 
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation"

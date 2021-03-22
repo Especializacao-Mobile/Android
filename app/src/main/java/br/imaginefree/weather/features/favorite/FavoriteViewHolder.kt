@@ -6,8 +6,12 @@ import br.imaginefree.weather.databinding.ItemFavoriteBinding
 
 class FavoriteViewHolder(private val binding: ItemFavoriteBinding): RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(city: City, clickListener: () -> Unit){
-
+    fun bind(city: City, clickListener: (City) -> Unit){
+        binding.city.text = city.name
+        binding.country.text = city.sys.country
+        binding.delete.setOnClickListener {
+            clickListener(city)
+        }
     }
 
 }
