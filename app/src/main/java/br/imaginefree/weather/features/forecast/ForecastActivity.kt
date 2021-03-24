@@ -37,11 +37,10 @@ class ForecastActivity : AppCompatActivity() {
         binding.favorite.setOnClickListener {
             city.favorite = true
             thread {
-                AppDatabase.getInstance(this)?.cityDao()?.insert(city)
+                AppDatabase.getInstance(this)?.cityDao()?.update(city)
                 runOnUiThread { Toast.makeText(this, "Saved Successfully!", Toast.LENGTH_LONG).show() }
             }
         }
-
         cityAdapter = CityAdapter(forecastList, AdapterType.FORECAST)
         binding.forecastList.adapter = cityAdapter
         binding.forecastList.layoutManager = LinearLayoutManager(this)
@@ -51,7 +50,7 @@ class ForecastActivity : AppCompatActivity() {
         cityId?.let {
             Service
                     .getService()
-                    .getForecast(cityId, "b02f5abb291a5a402a86d45e3807c357")
+                    .getForecast(cityId, "metric", "PT","b02f5abb291a5a402a86d45e3807c357")
                     .enqueue(object : Callback<BaseResponse<Forecast>> {
                         override fun onResponse(
                                 call: Call<BaseResponse<Forecast>>,
@@ -59,9 +58,6 @@ class ForecastActivity : AppCompatActivity() {
                         ) {
                             response.body()?.list?.let {
                                 forecastList.clear()
-                                it.forEach {
-                                    Log.d("Response:", it.toString())
-                                }
                                 forecastList.addAll(it)
                                 cityAdapter.notifyDataSetChanged()
                             }

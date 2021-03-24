@@ -2,4 +2,13 @@
     <string name="app_name">Weather</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_language">Choose Language</string>
+    <string name="pt">PT</string>
+    <string name="en">EN</string>
+    <string name="choose_scale">Choose Scale</string>
+    <string name="celsius">ºC</string>
+    <string name="fahrenheit">ºF</string>
+    <string name="choose_internet_mode">Choose Internet Mode</string>
+    <string name="offline_mode">Offline Mode</string>
+    <string name="online_mode">Online Mode</string>
 </resources>

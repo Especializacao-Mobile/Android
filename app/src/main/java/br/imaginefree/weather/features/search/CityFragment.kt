@@ -6,9 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.imaginefree.weather.R
+import br.imaginefree.weather.data.local.AppDatabase
 import br.imaginefree.weather.data.model.BaseResponse
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.network.Service
@@ -16,6 +18,7 @@ import br.imaginefree.weather.databinding.FragmentCityBinding
 import br.imaginefree.weather.features.adapter.AdapterType
 import br.imaginefree.weather.features.adapter.CityAdapter
 import br.imaginefree.weather.features.forecast.ForecastActivity
+import kotlin.concurrent.thread
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -58,11 +61,17 @@ class CityFragment : Fragment(R.layout.fragment_city){
                 ) {
                     response.body()?.list?.let {
                         cities.clear()
-                        it.forEach{
-                            Log.d("Response:", it.toString())
-                        }
                         cities.addAll(it)
                         cityAdapter.notifyDataSetChanged()
+                        it.forEach{ city ->
+                            thread {
+                                AppDatabase.getInstance(requireContext())?.cityDao()?.insert(city)
+                                city.weather.forEach { weather ->
+                                    weather.weatherOwnerId = city.cityId
+                                    AppDatabase.getInstance(requireContext())?.weatherDao()?.insert(weather)
+                                }
+                            }
+                        }
                     }
                 }
 

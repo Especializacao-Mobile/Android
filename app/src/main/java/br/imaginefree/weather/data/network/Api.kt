@@ -26,7 +26,9 @@ interface Api {
     @GET("forecast")
     fun getForecast(
         @Query("id") id: Long,
-        @Query("apiKey") apiKey: String,
+        @Query("units") unit: String,
+        @Query("lang") lang: String,
+        @Query("appid") apiKey: String,
     ): Call<BaseResponse<Forecast>>
 
 }

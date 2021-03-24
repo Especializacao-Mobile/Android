@@ -11,6 +11,7 @@ import br.imaginefree.weather.data.model.Weather
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun cityDao(): CityDao
+    abstract fun weatherDao(): WeatherDao
 
     companion object {
         private var INSTANCE: AppDatabase? = null
