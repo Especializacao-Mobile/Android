@@ -16,6 +16,7 @@ import br.imaginefree.weather.databinding.FragmentCityBinding
 import br.imaginefree.weather.databinding.FragmentFavoritesBinding
 import br.imaginefree.weather.features.adapter.AdapterType
 import br.imaginefree.weather.features.adapter.CityAdapter
+import br.imaginefree.weather.features.adapter.filter.CityFilter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +25,7 @@ import kotlin.concurrent.thread
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
     private lateinit var binding: FragmentFavoritesBinding
-    private lateinit var cityAdapter: CityAdapter
+    private lateinit var cityAdapter: CityAdapter<City>
     private val cities = ArrayList<City>()
 
     override fun onCreateView(
@@ -38,7 +39,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cityAdapter = CityAdapter(cities, AdapterType.FAVORITE){
+        cityAdapter = CityAdapter(cities, cities, AdapterType.FAVORITE){
             (it as? City)?.let { city ->
                 city.favorite = false
                 thread {
@@ -60,10 +61,13 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
                 }
             }
         }
-    }
-
-    companion object {
-
+        binding.btnSearch.setOnClickListener {
+            if (binding.searchName.text.toString().isNullOrBlank()) {
+                cityAdapter.filter.filter(CityFilter.NONE)
+            }else{
+                cityAdapter.filter.filter(binding.searchName.text.toString())
+            }
+        }
     }
 
 }

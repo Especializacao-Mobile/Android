@@ -15,21 +15,12 @@ import br.imaginefree.weather.features.favorite.FavoriteViewHolder
 import br.imaginefree.weather.features.search.CityViewHolder
 import br.imaginefree.weather.features.forecast.ForecastViewHolder
 
-class CityAdapter(
-        private val elements: ArrayList<*>,
+class CityAdapter<T>(
+        private val elements: ArrayList<T>,
+        private val citiesFiltered: MutableList<T>,
         private val adapterType: AdapterType,
         private val listener: ((Any) -> Unit)? = null,
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
-
-    private lateinit var filter: CityFilter
-    private val citiesFiltered: MutableList<City> = mutableListOf()
-
-    init {
-        citiesFiltered.addAll(citiesFiltered)
-        (elements as? MutableList<City>)?.let { cities ->
-            filter = CityFilter(citiesFiltered, this, cities)
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (adapterType.name) {
@@ -49,13 +40,19 @@ class CityAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as? ForecastViewHolder)?.bind(elements[position] as Forecast)
-        (holder as? CityViewHolder)?.bind(elements[position] as City, listener!!)
-        (holder as? FavoriteViewHolder)?.bind(elements[position] as City, listener!!)
+        (holder as? ForecastViewHolder)?.bind(citiesFiltered[position] as Forecast)
+        (holder as? CityViewHolder)?.bind(citiesFiltered[position] as City, listener!!)
+        (holder as? FavoriteViewHolder)?.bind(citiesFiltered[position] as City, listener!!)
     }
 
     override fun getItemCount() = elements.size
 
-    override fun getFilter(): Filter = filter
+    override fun getFilter(): Filter {
+        var filter: Filter = CityFilter(mutableListOf(), this, mutableListOf())
+        (elements as? MutableList<City>)?.let { cities ->
+            filter = CityFilter(citiesFiltered as MutableList<City>, this, cities)
+        }
+        return filter
+    }
 
 }

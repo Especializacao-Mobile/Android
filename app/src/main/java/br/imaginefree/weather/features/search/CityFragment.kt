@@ -26,7 +26,7 @@ import retrofit2.Response
 class CityFragment : Fragment(R.layout.fragment_city){
 
     private lateinit var binding: FragmentCityBinding
-    private lateinit var cityAdapter: CityAdapter
+    private lateinit var cityAdapter: CityAdapter<City>
     private val cities = ArrayList<City>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,18 +36,33 @@ class CityFragment : Fragment(R.layout.fragment_city){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cityAdapter = CityAdapter(cities, AdapterType.SEARCH, ::startForecastActivity)
+        cityAdapter = CityAdapter(cities, cities, AdapterType.SEARCH, ::startForecastActivity)
         binding.weatherList.adapter = cityAdapter
         binding.weatherList.layoutManager = LinearLayoutManager(requireContext())
         binding.btnSearch.setOnClickListener {
             getCities(binding.searchField.text.toString())
         }
+        getInternalElements()
     }
 
     private fun startForecastActivity(city: Any){
         val intent = Intent(requireContext(), ForecastActivity::class.java)
         intent.putExtra( "CITY", city as City)
         startActivity(intent)
+    }
+
+    private fun getInternalElements(){
+        thread {
+            val lista = AppDatabase.getInstance(requireContext())?.cityDao()?.getCities()
+            cities.clear()
+            lista?.forEach { citiesAndWeathers ->
+                citiesAndWeathers.city.weather = citiesAndWeathers.weather
+                cities.add(citiesAndWeathers.city)
+            }
+            activity?.runOnUiThread {
+                cityAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
     private fun getCities(searchField: String){

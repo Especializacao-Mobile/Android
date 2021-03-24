@@ -21,6 +21,10 @@ interface CityDao {
     fun getCitiesByName(searchName: String): List<CityWithWeathers>
 
     @Transaction
+    @Query("select * from city")
+    fun getCities(): List<CityWithWeathers>
+
+    @Transaction
     @Query("select * from city where favorite = 1")
     fun getFavoriteCities(): List<City>
 

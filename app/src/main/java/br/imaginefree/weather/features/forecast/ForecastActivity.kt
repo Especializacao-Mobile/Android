@@ -23,7 +23,7 @@ import kotlin.concurrent.thread
 class ForecastActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityForecastBinding
-    private lateinit var cityAdapter: CityAdapter
+    private lateinit var cityAdapter: CityAdapter<Forecast>
     private val forecastList = ArrayList<Forecast>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +41,7 @@ class ForecastActivity : AppCompatActivity() {
                 runOnUiThread { Toast.makeText(this, "Saved Successfully!", Toast.LENGTH_LONG).show() }
             }
         }
-        cityAdapter = CityAdapter(forecastList, AdapterType.FORECAST)
+        cityAdapter = CityAdapter(forecastList, forecastList, AdapterType.FORECAST)
         binding.forecastList.adapter = cityAdapter
         binding.forecastList.layoutManager = LinearLayoutManager(this)
     }

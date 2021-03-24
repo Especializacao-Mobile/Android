@@ -4,11 +4,15 @@ import android.widget.Filter
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.features.adapter.CityAdapter
 
-class CityFilter(
+class CityFilter<T>(
     private val citiesFiltered: MutableList<City>,
-    private val adapter: CityAdapter,
+    private val adapter: CityAdapter<T>,
     private val elements: MutableList<City>
 ) : Filter() {
+
+    companion object {
+        const val NONE = "NONE"
+    }
 
     override fun performFiltering(constraint: CharSequence?): FilterResults {
         val results = FilterResults()
@@ -21,10 +25,15 @@ class CityFilter(
     }
 
     private fun getFilteredResults(constraint: String): List<City> {
-        citiesFiltered.clear()
-        elements.forEach { city ->
-            if (city.name.contains(constraint)) {
-                citiesFiltered.add(city)
+        if (constraint == NONE){
+            citiesFiltered.clear()
+            citiesFiltered.addAll(elements)
+        }else {
+            citiesFiltered.clear()
+            elements.forEach { city ->
+                if (city.name.toLowerCase().contains(constraint.toLowerCase())) {
+                    citiesFiltered.add(city)
+                }
             }
         }
         return citiesFiltered
