@@ -10,7 +10,7 @@ import br.imaginefree.weather.R
 import br.imaginefree.weather.data.local.AppDatabase
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.databinding.FragmentFavoritesBinding
-import br.imaginefree.weather.features.adapter.AdapterType
+import br.imaginefree.weather.features.adapter.ViewHolderType
 import br.imaginefree.weather.features.adapter.CityAdapter
 import br.imaginefree.weather.features.adapter.filter.Filter
 import kotlin.concurrent.thread
@@ -37,7 +37,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     }
 
     private fun setUpViews(){
-        cityAdapter = CityAdapter(cities, AdapterType.FAVORITE){
+        cityAdapter = CityAdapter(cities, ViewHolderType.FAVORITE){
             (it as? City)?.let { city ->
                 city.favorite = false
                 thread {

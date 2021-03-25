@@ -1,9 +1,8 @@
-package br.imaginefree.weather.features.search
+package br.imaginefree.weather.features.adapter.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.databinding.ItemCityBinding
-import br.imaginefree.weather.databinding.ItemFavoriteBinding
 import br.imaginefree.weather.utils.Settings
 
 class CityViewHolder(private val binding: ItemCityBinding) : RecyclerView.ViewHolder(binding.root) {

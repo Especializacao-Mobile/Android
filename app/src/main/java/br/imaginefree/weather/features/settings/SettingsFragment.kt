@@ -11,13 +11,11 @@ import br.imaginefree.weather.utils.Settings.IMPERIAL
 import br.imaginefree.weather.utils.Settings.LANG_EN
 import br.imaginefree.weather.utils.Settings.LANG_PT
 import br.imaginefree.weather.utils.Settings.METRIC
-import br.imaginefree.weather.utils.Settings.OFFLINE_MODE
 import br.imaginefree.weather.utils.Settings.ONLINE_MODE
 import br.imaginefree.weather.utils.Settings.getConfigPreferencesEditor
 import br.imaginefree.weather.utils.Settings.isEN
 import br.imaginefree.weather.utils.Settings.isImperial
 import br.imaginefree.weather.utils.Settings.isMetric
-import br.imaginefree.weather.utils.Settings.isOffLine
 import br.imaginefree.weather.utils.Settings.isOnLine
 import br.imaginefree.weather.utils.Settings.isPT
 
@@ -43,7 +41,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.celsius.isChecked = isMetric()
         binding.fahrenheit.isChecked = isImperial()
 
-        binding.offline.isChecked = isOffLine()
+        binding.offline.isChecked = !isOnLine()
         binding.online.isChecked = isOnLine()
 
         binding.pt.isChecked = isPT()
@@ -74,19 +72,23 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.internetMode.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 binding.offline.id -> {
-                    setElement(OFFLINE_MODE, ONLINE_MODE)
+                    setElement(null, ONLINE_MODE)
                 }
                 binding.online.id -> {
-                    setElement(ONLINE_MODE, OFFLINE_MODE)
+                    setElement(ONLINE_MODE, null)
                 }
             }
         }
     }
 
-    private fun setElement(key: String, keyOff: String){
+    private fun setElement(keyOne: String? = null, keyTwo: String? = null){
         getConfigPreferencesEditor(requireContext()).apply {
-            putBoolean(key, true)
-            putBoolean(keyOff, false)
+            keyOne?.let {
+                putBoolean(it, true)
+            }
+            keyTwo?.let {
+                putBoolean(it, false)
+            }
             commit()
         }
     }

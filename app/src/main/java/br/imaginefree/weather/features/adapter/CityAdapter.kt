@@ -10,14 +10,14 @@ import br.imaginefree.weather.databinding.ItemCityBinding
 import br.imaginefree.weather.databinding.ItemFavoriteBinding
 import br.imaginefree.weather.databinding.ItemForecastBinding
 import br.imaginefree.weather.features.adapter.filter.Filter
-import br.imaginefree.weather.features.favorite.FavoriteViewHolder
-import br.imaginefree.weather.features.search.CityViewHolder
-import br.imaginefree.weather.features.forecast.ForecastViewHolder
+import br.imaginefree.weather.features.adapter.viewholder.FavoriteViewHolder
+import br.imaginefree.weather.features.adapter.viewholder.CityViewHolder
+import br.imaginefree.weather.features.adapter.viewholder.ForecastViewHolder
 
 class CityAdapter<T>(
-        elements: ArrayList<T>,
-        private val adapterType: AdapterType,
-        private val listener: ((Any) -> Unit)? = null,
+    elements: ArrayList<T>,
+    private val viewHolderType: ViewHolderType,
+    private val listener: ((Any) -> Unit)? = null,
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
     private var filter: Filter<T>
@@ -29,12 +29,12 @@ class CityAdapter<T>(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (adapterType.name) {
-            AdapterType.FAVORITE.name -> {
+        return when (viewHolderType.name) {
+            ViewHolderType.FAVORITE.name -> {
                 val favoriteBinding = ItemFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 FavoriteViewHolder(favoriteBinding)
             }
-            AdapterType.FORECAST.name -> {
+            ViewHolderType.FORECAST.name -> {
                 val forecastBinding = ItemForecastBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 ForecastViewHolder(forecastBinding)
             }

@@ -11,7 +11,7 @@ import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.model.Forecast
 import br.imaginefree.weather.data.network.Service
 import br.imaginefree.weather.databinding.ActivityForecastBinding
-import br.imaginefree.weather.features.adapter.AdapterType
+import br.imaginefree.weather.features.adapter.ViewHolderType
 import br.imaginefree.weather.features.adapter.CityAdapter
 import br.imaginefree.weather.features.adapter.filter.Filter
 import br.imaginefree.weather.utils.Settings
@@ -41,7 +41,7 @@ class ForecastActivity : AppCompatActivity() {
                 runOnUiThread { Toast.makeText(this, getString(R.string.saved_successfully), Toast.LENGTH_LONG).show() }
             }
         }
-        cityAdapter = CityAdapter(forecastList, AdapterType.FORECAST)
+        cityAdapter = CityAdapter(forecastList, ViewHolderType.FORECAST)
         binding.forecastList.adapter = cityAdapter
         binding.forecastList.layoutManager = LinearLayoutManager(this)
     }

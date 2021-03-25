@@ -14,7 +14,6 @@ object Settings {
     const val IMPERIAL = "imperial"
     const val LANG_PT = "PT"
     const val LANG_EN = "EN"
-    const val OFFLINE_MODE = "OFFLINE_MODE"
     const val ONLINE_MODE = "ONLINE_MODE"
 
     private var configPreferences: SharedPreferences? = null
@@ -34,10 +33,6 @@ object Settings {
 
     fun isEN(): Boolean {
         return configPreferences?.getBoolean(LANG_EN, false) ?: false
-    }
-
-    fun isOffLine(): Boolean {
-        return configPreferences?.getBoolean(OFFLINE_MODE, false) ?: false
     }
 
     fun isOnLine(): Boolean {
@@ -76,20 +71,6 @@ object Settings {
             }
             else -> {
                 METRIC
-            }
-        }
-    }
-
-    fun getNetworkMode(): String {
-        return when {
-            isOnLine() -> {
-                ONLINE_MODE
-            }
-            isOffLine() -> {
-                OFFLINE_MODE
-            }
-            else -> {
-                ONLINE_MODE
             }
         }
     }

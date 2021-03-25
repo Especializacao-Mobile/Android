@@ -1,4 +1,4 @@
-package br.imaginefree.weather.features.forecast
+package br.imaginefree.weather.features.adapter.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import br.imaginefree.weather.data.model.Forecast

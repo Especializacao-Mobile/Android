@@ -1,4 +1,4 @@
-package br.imaginefree.weather.features.favorite
+package br.imaginefree.weather.features.adapter.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import br.imaginefree.weather.data.model.City

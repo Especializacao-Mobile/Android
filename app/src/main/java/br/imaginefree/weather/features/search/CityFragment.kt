@@ -9,20 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.imaginefree.weather.R
-import br.imaginefree.weather.data.local.AppDatabase
-import br.imaginefree.weather.data.model.BaseResponse
 import br.imaginefree.weather.data.model.City
-import br.imaginefree.weather.data.network.Service
 import br.imaginefree.weather.databinding.FragmentCityBinding
-import br.imaginefree.weather.features.adapter.AdapterType
+import br.imaginefree.weather.features.adapter.ViewHolderType
 import br.imaginefree.weather.features.adapter.CityAdapter
 import br.imaginefree.weather.features.adapter.filter.Filter
 import br.imaginefree.weather.features.forecast.ForecastActivity
-import br.imaginefree.weather.utils.Settings
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import kotlin.concurrent.thread
 
 class CityFragment : Fragment(R.layout.fragment_city){
 
@@ -38,12 +30,11 @@ class CityFragment : Fragment(R.layout.fragment_city){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cityAdapter = CityAdapter(cities, AdapterType.SEARCH, ::startForecastActivity)
+        cityAdapter = CityAdapter(cities, ViewHolderType.SEARCH, ::startForecastActivity)
         binding.weatherList.adapter = cityAdapter
         binding.weatherList.layoutManager = LinearLayoutManager(requireContext())
         binding.btnSearch.setOnClickListener {
-            //getCities(binding.searchField.text.toString())
-            cityFragmentViewModel.fetchCitiesByName(binding.searchField.text.toString())
+            cityFragmentViewModel.fetchCitiesByName(requireContext(), binding.searchField.text.toString())
         }
         setUpObservable()
     }
@@ -61,34 +52,8 @@ class CityFragment : Fragment(R.layout.fragment_city){
                 cities.addAll(it)
                 cityAdapter.notifyDataSetChanged()
                 cityAdapter.filter.filter(Filter.NONE)
-                saveCities(it)
             }
         })
-    }
-
-    private fun saveCities(cities: List<City>){
-        cities.forEach{ city ->
-            thread {
-                AppDatabase.getInstance(requireContext())?.cityDao()?.insert(city)
-                city.weather.forEach { weather ->
-                    weather.weatherOwnerId = city.cityId
-                    AppDatabase.getInstance(requireContext())?.weatherDao()?.insert(weather)
-                }
-            }
-        }
-    }
-
-    private fun getInternalElements(){
-        thread {
-            cities.clear()
-            AppDatabase.getInstance(requireContext())?.cityDao()?.getCities()?.forEach { citiesAndWeathers ->
-                citiesAndWeathers.city.weather = citiesAndWeathers.weather
-                cities.add(citiesAndWeathers.city)
-            }
-            activity?.runOnUiThread {
-                cityAdapter.notifyDataSetChanged()
-            }
-        }
     }
 
 }

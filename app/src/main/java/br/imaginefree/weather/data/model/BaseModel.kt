@@ -10,8 +10,12 @@ enum class STATUS {
     LOADING, SUCCESS, ERROR
 }
 
-sealed class ViewState
+/**
+ * Another approach
+ */
+/*sealed class ViewState{
+    object Loading : ViewState()
+    data class Success<T>(val data: BaseResponse<T>) : ViewState()
+    object Error : ViewState()
+}*/
 
-class Loading : ViewState()
-data class Success<T>(val data: BaseResponse<T>) : ViewState()
-class Error : ViewState()

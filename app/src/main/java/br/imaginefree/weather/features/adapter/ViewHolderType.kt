@@ -1,6 +1,6 @@
 package br.imaginefree.weather.features.adapter
 
-enum class AdapterType {
+enum class ViewHolderType {
     FAVORITE,
     FORECAST,
     SEARCH
