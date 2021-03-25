@@ -5,13 +5,7 @@ import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.model.Forecast
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
-
-/**
- * units: metric para C° e imperial para F°
- * lang: PT ou EN
- */
 
 interface Api {
 

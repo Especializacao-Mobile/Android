@@ -2,11 +2,9 @@ package br.imaginefree.weather.features.search
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.imaginefree.weather.R
@@ -18,10 +16,11 @@ import br.imaginefree.weather.databinding.FragmentCityBinding
 import br.imaginefree.weather.features.adapter.AdapterType
 import br.imaginefree.weather.features.adapter.CityAdapter
 import br.imaginefree.weather.features.forecast.ForecastActivity
-import kotlin.concurrent.thread
+import br.imaginefree.weather.utils.Settings
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.concurrent.thread
 
 class CityFragment : Fragment(R.layout.fragment_city){
 
@@ -42,7 +41,6 @@ class CityFragment : Fragment(R.layout.fragment_city){
         binding.btnSearch.setOnClickListener {
             getCities(binding.searchField.text.toString())
         }
-        getInternalElements()
     }
 
     private fun startForecastActivity(city: Any){
@@ -68,7 +66,7 @@ class CityFragment : Fragment(R.layout.fragment_city){
     private fun getCities(searchField: String){
         Service
             .getService()
-            .getCity(searchField, "metric", "PT", "b02f5abb291a5a402a86d45e3807c357")
+            .getCity(searchField, Settings.getMeter(), Settings.getLanguage(), "b02f5abb291a5a402a86d45e3807c357")
             .enqueue(object : Callback<BaseResponse<City>> {
                 override fun onResponse(
                     call: Call<BaseResponse<City>>,

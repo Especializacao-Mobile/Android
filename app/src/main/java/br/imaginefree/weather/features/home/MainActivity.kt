@@ -1,12 +1,13 @@
 package br.imaginefree.weather.features.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import br.imaginefree.weather.R
 import br.imaginefree.weather.databinding.ActivityMainBinding
+import br.imaginefree.weather.utils.Settings.setConfigPreferencesInstance
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         super.onStart()
         navController = Navigation.findNavController(this, R.id.nav_main_fragment)
         setUpBottomNavigation()
+        setConfigPreferencesInstance(this)
     }
 
     private fun setUpBottomNavigation() {

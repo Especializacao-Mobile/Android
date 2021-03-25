@@ -1,12 +1,9 @@
 package br.imaginefree.weather.features.forecast
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.imaginefree.weather.R
 import br.imaginefree.weather.data.local.AppDatabase
 import br.imaginefree.weather.data.model.BaseResponse
 import br.imaginefree.weather.data.model.City
@@ -15,6 +12,7 @@ import br.imaginefree.weather.data.network.Service
 import br.imaginefree.weather.databinding.ActivityForecastBinding
 import br.imaginefree.weather.features.adapter.AdapterType
 import br.imaginefree.weather.features.adapter.CityAdapter
+import br.imaginefree.weather.utils.Settings
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,7 +48,7 @@ class ForecastActivity : AppCompatActivity() {
         cityId?.let {
             Service
                     .getService()
-                    .getForecast(cityId, "metric", "PT","b02f5abb291a5a402a86d45e3807c357")
+                    .getForecast(cityId,  Settings.getMeter(), Settings.getLanguage(),"b02f5abb291a5a402a86d45e3807c357")
                     .enqueue(object : Callback<BaseResponse<Forecast>> {
                         override fun onResponse(
                                 call: Call<BaseResponse<Forecast>>,

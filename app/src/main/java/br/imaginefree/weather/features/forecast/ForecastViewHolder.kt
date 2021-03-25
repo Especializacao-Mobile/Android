@@ -10,7 +10,7 @@ class ForecastViewHolder (private val binding: ItemForecastBinding): RecyclerVie
         binding.humidity.text = forecast.main.humidity.toString()
         binding.time.text = forecast.dt_txt
         if (forecast.weather.isNotEmpty()) {
-            binding.sky.text = forecast.weather[0].main
+            binding.sky.text = forecast.weather[0].description
         }
         binding.sky.text = forecast.weather[0].main
         binding.temperature.text = forecast.main.temp.toString()

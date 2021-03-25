@@ -1,7 +1,6 @@
 package br.imaginefree.weather.features.favorite
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,17 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.imaginefree.weather.R
 import br.imaginefree.weather.data.local.AppDatabase
-import br.imaginefree.weather.data.model.BaseResponse
 import br.imaginefree.weather.data.model.City
-import br.imaginefree.weather.data.network.Service
-import br.imaginefree.weather.databinding.FragmentCityBinding
 import br.imaginefree.weather.databinding.FragmentFavoritesBinding
 import br.imaginefree.weather.features.adapter.AdapterType
 import br.imaginefree.weather.features.adapter.CityAdapter
 import br.imaginefree.weather.features.adapter.filter.CityFilter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import kotlin.concurrent.thread
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
