@@ -21,7 +21,7 @@ class CityFragmentViewModel: ViewModel(), LifecycleObserver {
     fun fetchCitiesByName(searchName: String){
         cityInfo.postValue(BaseModel(STATUS.LOADING))
         viewModelScope.launch {
-            val response = CityService().getCities()
+            val response = CityService().getCitiesByName(searchName)
             cityInfo.postValue(response)
         }
     }

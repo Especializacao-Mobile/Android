@@ -5,15 +5,16 @@ import br.imaginefree.weather.data.model.BaseResponse
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.model.STATUS
 import br.imaginefree.weather.data.network.coroutines.Network
+import br.imaginefree.weather.utils.Settings
 
 class CityService {
 
-    suspend fun getCities(): BaseModel<BaseResponse<City>> {
+    suspend fun getCitiesByName(searchedName: String): BaseModel<BaseResponse<City>> {
 
         lateinit var resultResponse: BaseModel<BaseResponse<City>>
 
         val result = runCatching {
-            val response = Network.getService().getCity("", "", "")
+            val response = Network.getService().getCity(searchedName, Settings.getMeter(), Settings.getLanguage())
             resultResponse = if (response.isSuccessful) {
                 response.body()?.let {
                     BaseModel(STATUS.SUCCESS, it)
