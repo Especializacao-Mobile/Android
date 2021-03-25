@@ -11,4 +11,5 @@
     <string name="choose_internet_mode">Choose Internet Mode</string>
     <string name="offline_mode">Offline Mode</string>
     <string name="online_mode">Online Mode</string>
+    <string name="saved_successfully">Saved Successfully!</string>
 </resources>

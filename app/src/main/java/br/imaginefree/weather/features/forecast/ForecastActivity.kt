@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.imaginefree.weather.R
 import br.imaginefree.weather.data.local.AppDatabase
 import br.imaginefree.weather.data.model.BaseResponse
 import br.imaginefree.weather.data.model.City
@@ -28,7 +29,7 @@ class ForecastActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityForecastBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val city = intent.extras?.get("CITY") as? City
+        val city = intent.extras?.get(CITY) as? City
         binding.place.text = city!!.name
         binding.temperature.text = city.main.temp.toString()
         getForecast(city.cityId)
@@ -36,10 +37,10 @@ class ForecastActivity : AppCompatActivity() {
             city.favorite = true
             thread {
                 AppDatabase.getInstance(this)?.cityDao()?.update(city)
-                runOnUiThread { Toast.makeText(this, "Saved Successfully!", Toast.LENGTH_LONG).show() }
+                runOnUiThread { Toast.makeText(this, getString(R.string.saved_successfully), Toast.LENGTH_LONG).show() }
             }
         }
-        cityAdapter = CityAdapter(forecastList, forecastList, AdapterType.FORECAST)
+        cityAdapter = CityAdapter(forecastList, AdapterType.FORECAST)
         binding.forecastList.adapter = cityAdapter
         binding.forecastList.layoutManager = LinearLayoutManager(this)
     }
@@ -67,5 +68,9 @@ class ForecastActivity : AppCompatActivity() {
 
                     })
         }
+    }
+
+    companion object {
+        const val CITY = "CITY"
     }
 }

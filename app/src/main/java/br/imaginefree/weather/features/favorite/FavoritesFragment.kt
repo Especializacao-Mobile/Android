@@ -32,7 +32,12 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cityAdapter = CityAdapter(cities, cities, AdapterType.FAVORITE){
+        setUpViews()
+        loadFavorites()
+    }
+
+    private fun setUpViews(){
+        cityAdapter = CityAdapter(cities, AdapterType.FAVORITE){
             (it as? City)?.let { city ->
                 city.favorite = false
                 thread {
@@ -45,20 +50,24 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         }
         binding.favoritesList.adapter = cityAdapter
         binding.favoritesList.layoutManager = LinearLayoutManager(requireContext())
+        binding.btnSearch.setOnClickListener {
+            if (binding.searchName.text.toString().isNullOrBlank()) {
+                cityAdapter.filter.filter(CityFilter.NONE)
+            }else{
+                cityAdapter.filter.filter(binding.searchName.text.toString())
+            }
+        }
+    }
+
+    private fun loadFavorites(){
         thread {
             AppDatabase.getInstance(requireContext())?.cityDao()?.getFavoriteCities()?.let {
                 cities.clear()
                 cities.addAll(it)
                 activity?.runOnUiThread {
                     cityAdapter.notifyDataSetChanged()
+                    cityAdapter.filter.filter(CityFilter.NONE)
                 }
-            }
-        }
-        binding.btnSearch.setOnClickListener {
-            if (binding.searchName.text.toString().isNullOrBlank()) {
-                cityAdapter.filter.filter(CityFilter.NONE)
-            }else{
-                cityAdapter.filter.filter(binding.searchName.text.toString())
             }
         }
     }

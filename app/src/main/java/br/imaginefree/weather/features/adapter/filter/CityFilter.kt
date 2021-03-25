@@ -5,9 +5,9 @@ import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.features.adapter.CityAdapter
 
 class CityFilter<T>(
-    private val citiesFiltered: MutableList<City>,
+    private val citiesFiltered: MutableList<T>,
     private val adapter: CityAdapter<T>,
-    private val elements: MutableList<City>
+    private val elements: MutableList<T>
 ) : Filter() {
 
     companion object {
@@ -24,15 +24,17 @@ class CityFilter<T>(
         adapter.notifyDataSetChanged()
     }
 
-    private fun getFilteredResults(constraint: String): List<City> {
+    private fun getFilteredResults(constraint: String): MutableList<T> {
         if (constraint == NONE){
             citiesFiltered.clear()
             citiesFiltered.addAll(elements)
         }else {
             citiesFiltered.clear()
             elements.forEach { city ->
-                if (city.name.toLowerCase().contains(constraint.toLowerCase())) {
-                    citiesFiltered.add(city)
+                (city as? City)?.let {
+                    if (city.name.toLowerCase().contains(constraint.toLowerCase())) {
+                        citiesFiltered.add(city)
+                    }
                 }
             }
         }
