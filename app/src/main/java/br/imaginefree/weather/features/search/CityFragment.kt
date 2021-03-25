@@ -15,15 +15,20 @@ import br.imaginefree.weather.features.adapter.ViewHolderType
 import br.imaginefree.weather.features.adapter.CityAdapter
 import br.imaginefree.weather.features.adapter.filter.Filter
 import br.imaginefree.weather.features.forecast.ForecastActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CityFragment : Fragment(R.layout.fragment_city){
+class CityFragment : Fragment(R.layout.fragment_city) {
 
     private lateinit var binding: FragmentCityBinding
     private lateinit var cityAdapter: CityAdapter<City>
     private val cities = ArrayList<City>()
-    private val cityFragmentViewModel = CityFragmentViewModel()
+    private val cityFragmentViewModel: CityFragmentViewModel by viewModel()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentCityBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -34,18 +39,21 @@ class CityFragment : Fragment(R.layout.fragment_city){
         binding.weatherList.adapter = cityAdapter
         binding.weatherList.layoutManager = LinearLayoutManager(requireContext())
         binding.btnSearch.setOnClickListener {
-            cityFragmentViewModel.fetchCitiesByName(requireContext(), binding.searchField.text.toString())
+            cityFragmentViewModel.fetchCitiesByName(
+                requireContext(),
+                binding.searchField.text.toString()
+            )
         }
         setUpObservable()
     }
 
-    private fun startForecastActivity(city: Any){
+    private fun startForecastActivity(city: Any) {
         val intent = Intent(requireContext(), ForecastActivity::class.java)
         intent.putExtra(ForecastActivity.CITY, city as City)
         startActivity(intent)
     }
 
-    private fun setUpObservable(){
+    private fun setUpObservable() {
         cityFragmentViewModel.cityInfoObservable.observe(viewLifecycleOwner, Observer { model ->
             model.data?.list?.let {
                 cities.clear()

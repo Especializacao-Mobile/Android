@@ -1,11 +1,8 @@
 package br.imaginefree.weather.features.forecast
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.imaginefree.weather.R
-import br.imaginefree.weather.data.local.AppDatabase
 import br.imaginefree.weather.data.model.BaseResponse
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.model.Forecast
@@ -14,17 +11,18 @@ import br.imaginefree.weather.databinding.ActivityForecastBinding
 import br.imaginefree.weather.features.adapter.ViewHolderType
 import br.imaginefree.weather.features.adapter.CityAdapter
 import br.imaginefree.weather.features.adapter.filter.Filter
-import br.imaginefree.weather.utils.Settings
+import br.imaginefree.weather.data.local.Settings
+import org.koin.android.ext.android.inject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.concurrent.thread
 
 class ForecastActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityForecastBinding
     private lateinit var cityAdapter: CityAdapter<Forecast>
     private val forecastList = ArrayList<Forecast>()
+    private val settings: Settings by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,11 +33,11 @@ class ForecastActivity : AppCompatActivity() {
         binding.temperature.text = city.main.temp.toString()
         getForecast(city.cityId)
         binding.favorite.setOnClickListener {
-            city.favorite = true
+            /*city.favorite = true
             thread {
                 AppDatabase.getInstance(this)?.cityDao()?.update(city)
                 runOnUiThread { Toast.makeText(this, getString(R.string.saved_successfully), Toast.LENGTH_LONG).show() }
-            }
+            }*/
         }
         cityAdapter = CityAdapter(forecastList, ViewHolderType.FORECAST)
         binding.forecastList.adapter = cityAdapter
@@ -50,7 +48,7 @@ class ForecastActivity : AppCompatActivity() {
         cityId?.let {
             Service
                     .getService()
-                    .getForecast(cityId,  Settings.getMeter(), Settings.getLanguage())
+                    .getForecast(cityId,  settings.getMeter(), settings.getLanguage())
                     .enqueue(object : Callback<BaseResponse<Forecast>> {
                         override fun onResponse(
                                 call: Call<BaseResponse<Forecast>>,

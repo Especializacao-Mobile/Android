@@ -3,7 +3,7 @@ package br.imaginefree.weather.features.adapter.viewholder
 import androidx.recyclerview.widget.RecyclerView
 import br.imaginefree.weather.data.model.Forecast
 import br.imaginefree.weather.databinding.ItemForecastBinding
-import br.imaginefree.weather.utils.Settings
+import br.imaginefree.weather.data.local.Settings
 
 class ForecastViewHolder (private val binding: ItemForecastBinding): RecyclerView.ViewHolder(binding.root) {
 
@@ -13,9 +13,9 @@ class ForecastViewHolder (private val binding: ItemForecastBinding): RecyclerVie
         if (forecast.weather.isNotEmpty()) {
             binding.sky.text = forecast.weather[0].description
         }
-        if (Settings.getMeter() == Settings.METRIC){
+        if (Settings().getMeter() == Settings().METRIC){
             binding.temperatureType.text = "ºC"
-        } else if (Settings.getMeter() == Settings.IMPERIAL){
+        } else if (Settings().getMeter() == Settings().IMPERIAL){
             binding.temperatureType.text = "ºF"
         }
         binding.sky.text = forecast.weather[0].main

@@ -40,12 +40,12 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         cityAdapter = CityAdapter(cities, ViewHolderType.FAVORITE){
             (it as? City)?.let { city ->
                 city.favorite = false
-                thread {
+                /*thread {
                     AppDatabase.getInstance(requireContext())?.cityDao()?.update(city)
                     val index = cities.indexOf(city)
                     cities.remove(city)
                     activity?.runOnUiThread { cityAdapter.notifyItemRemoved(index) }
-                }
+                }*/
             }
         }
         binding.favoritesList.adapter = cityAdapter
@@ -60,7 +60,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     }
 
     private fun loadFavorites(){
-        thread {
+        /*thread {
             AppDatabase.getInstance(requireContext())?.cityDao()?.getFavoriteCities()?.let {
                 cities.clear()
                 cities.addAll(it)
@@ -69,7 +69,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
                     cityAdapter.filter.filter(Filter.NONE)
                 }
             }
-        }
+        }*/
     }
 
 }

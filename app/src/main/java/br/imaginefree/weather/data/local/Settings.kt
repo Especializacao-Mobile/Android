@@ -1,4 +1,4 @@
-package br.imaginefree.weather.utils
+package br.imaginefree.weather.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -8,13 +8,13 @@ import android.content.SharedPreferences
  * lang: PT ou EN
  */
 
-object Settings {
-    private const val CONFIG_PREFERENCES = "CONFIG_PREFERENCES"
-    const val METRIC = "metric"
-    const val IMPERIAL = "imperial"
-    const val LANG_PT = "PT"
-    const val LANG_EN = "EN"
-    const val ONLINE_MODE = "ONLINE_MODE"
+class Settings {
+    private val CONFIG_PREFERENCES = "CONFIG_PREFERENCES"
+    val METRIC = "metric"
+    val IMPERIAL = "imperial"
+    val LANG_PT = "PT"
+    val LANG_EN = "EN"
+    val ONLINE_MODE = "ONLINE_MODE"
 
     private var configPreferences: SharedPreferences? = null
 

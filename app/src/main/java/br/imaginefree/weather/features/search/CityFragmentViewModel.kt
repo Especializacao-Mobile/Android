@@ -2,25 +2,31 @@ package br.imaginefree.weather.features.search
 
 import android.content.Context
 import androidx.lifecycle.*
-import br.imaginefree.weather.data.local.AppDatabase
+import br.imaginefree.weather.data.local.CityDao
 import br.imaginefree.weather.data.model.BaseModel
 import br.imaginefree.weather.data.model.BaseResponse
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.model.STATUS
 import br.imaginefree.weather.data.repository.CityService
-import br.imaginefree.weather.utils.Settings
+import br.imaginefree.weather.data.local.Settings
+import br.imaginefree.weather.data.local.WeatherDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CityFragmentViewModel : ViewModel(), LifecycleObserver {
+class CityFragmentViewModel(
+    private val cityService: CityService,
+    private val cityDao: CityDao,
+    private val weatherDao: WeatherDao,
+    private val settings: Settings
+) : ViewModel(), LifecycleObserver {
 
     private val cityInfo = MutableLiveData<BaseModel<BaseResponse<City>>>()
     val cityInfoObservable: LiveData<BaseModel<BaseResponse<City>>>
         get() = cityInfo
 
     fun fetchCitiesByName(context: Context, searchName: String) {
-        if (Settings.isOnLine()) {
+        if (settings.isOnLine()) {
             fetchByNameOnLine(context, searchName)
         } else {
             fetchByNameOffLine(context, searchName)
@@ -30,7 +36,7 @@ class CityFragmentViewModel : ViewModel(), LifecycleObserver {
     private fun fetchByNameOnLine(context: Context, searchName: String) {
         cityInfo.postValue(BaseModel(STATUS.LOADING))
         viewModelScope.launch {
-            val response = CityService().getCitiesByName(searchName)
+            val response = cityService.getCitiesByName(searchName)
             saveCities(context, response.data?.list)
             cityInfo.postValue(response)
         }
@@ -41,7 +47,7 @@ class CityFragmentViewModel : ViewModel(), LifecycleObserver {
             withContext(Dispatchers.Default) {
                 val list = arrayListOf<City>()
                 val result =
-                    AppDatabase.getInstance(context)?.cityDao()?.getCitiesByName(searchName)
+                    cityDao.getCitiesByName(searchName)
                 result?.forEach { citiesAndWeathers ->
                     citiesAndWeathers.city.weather = citiesAndWeathers.weather
                     list.add(citiesAndWeathers.city)
@@ -60,10 +66,10 @@ class CityFragmentViewModel : ViewModel(), LifecycleObserver {
         viewModelScope.launch {
             withContext(Dispatchers.Default) {
                 cities?.forEach { city ->
-                    AppDatabase.getInstance(context)?.cityDao()?.insert(city)
+                    cityDao.insert(city)
                     city.weather.forEach { weather ->
                         weather.weatherOwnerId = city.cityId
-                        AppDatabase.getInstance(context)?.weatherDao()?.insert(weather)
+                        weatherDao.insert(weather)
                     }
                 }
             }

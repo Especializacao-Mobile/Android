@@ -6,14 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import br.imaginefree.weather.R
+import br.imaginefree.weather.data.local.Settings
 import br.imaginefree.weather.databinding.ActivityMainBinding
-import br.imaginefree.weather.utils.Settings.setConfigPreferencesInstance
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private val settings: Settings by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         super.onStart()
         navController = Navigation.findNavController(this, R.id.nav_main_fragment)
         setUpBottomNavigation()
-        setConfigPreferencesInstance(this)
+        settings.setConfigPreferencesInstance(this)
     }
 
     private fun setUpBottomNavigation() {
