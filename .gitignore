@@ -85,4 +85,4 @@ lint/tmp/
 # lint/reports/
 
 # credentials
-credential.properties
+credentials.properties

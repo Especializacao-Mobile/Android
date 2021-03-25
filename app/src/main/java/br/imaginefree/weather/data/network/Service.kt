@@ -21,7 +21,7 @@ object Service {
             .build()
 
     private val instance = Retrofit.Builder()
-            .baseUrl()
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

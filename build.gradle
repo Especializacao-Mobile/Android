@@ -2,7 +2,7 @@
 buildscript {
 
     if (!project.hasProperty('marvel_repository')) {
-        ext.weather_url = '"https://gateway.marvel.com/"'
+        ext.weather_url = '"http://api.openweathermap.org/data/2.5/"'
         def props = new Properties()
         file('credentials.properties').withInputStream { props.load(it) }
         ext.public_key = '"' + props.getProperty('weather.public.key') + '"'

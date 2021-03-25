@@ -1,5 +1,6 @@
 package br.imaginefree.weather.data.network
 
+import br.imaginefree.weather.BuildConfig
 import br.imaginefree.weather.data.model.BaseResponse
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.model.Forecast
@@ -14,7 +15,7 @@ interface Api {
         @Query("q") city: String,
         @Query("units") unit: String,
         @Query("lang") lang: String,
-        @Query("appid") apiKey: String,
+        @Query("appid") apiKey: String = BuildConfig.PUBLIC_KEY
     ): Call<BaseResponse<City>>
 
     @GET("forecast")
@@ -22,7 +23,7 @@ interface Api {
         @Query("id") id: Long,
         @Query("units") unit: String,
         @Query("lang") lang: String,
-        @Query("appid") apiKey: String,
+        @Query("appid") apiKey: String = BuildConfig.PUBLIC_KEY
     ): Call<BaseResponse<Forecast>>
 
 }

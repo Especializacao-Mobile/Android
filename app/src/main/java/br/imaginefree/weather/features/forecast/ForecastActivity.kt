@@ -50,7 +50,7 @@ class ForecastActivity : AppCompatActivity() {
         cityId?.let {
             Service
                     .getService()
-                    .getForecast(cityId,  Settings.getMeter(), Settings.getLanguage(),"b02f5abb291a5a402a86d45e3807c357")
+                    .getForecast(cityId,  Settings.getMeter(), Settings.getLanguage())
                     .enqueue(object : Callback<BaseResponse<Forecast>> {
                         override fun onResponse(
                                 call: Call<BaseResponse<Forecast>>,

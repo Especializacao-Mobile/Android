@@ -66,7 +66,7 @@ class CityFragment : Fragment(R.layout.fragment_city){
     private fun getCities(searchField: String){
         Service
             .getService()
-            .getCity(searchField, Settings.getMeter(), Settings.getLanguage(), "b02f5abb291a5a402a86d45e3807c357")
+            .getCity(searchField, Settings.getMeter(), Settings.getLanguage())
             .enqueue(object : Callback<BaseResponse<City>> {
                 override fun onResponse(
                     call: Call<BaseResponse<City>>,

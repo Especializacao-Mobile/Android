@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
-    app:cardCornerRadius="8dp"
-    android:layout_height="wrap_content">
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -67,9 +67,9 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:src="@drawable/ic_weather_placeholder"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_weather_placeholder" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/cloud"
@@ -77,10 +77,10 @@
             android:layout_height="0dp"
             android:layout_marginStart="48dp"
             android:layout_marginLeft="48dp"
-            app:layout_constraintTop_toTopOf="@id/humidity"
+            android:src="@drawable/ic_cloud_queue"
             app:layout_constraintBottom_toBottomOf="@id/humidity"
             app:layout_constraintStart_toEndOf="@id/temperature_type"
-            android:src="@drawable/ic_cloud_queue" />
+            app:layout_constraintTop_toTopOf="@id/humidity" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/humidity"
@@ -98,10 +98,10 @@
             android:layout_height="0dp"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
-            app:layout_constraintTop_toTopOf="@id/humidity"
+            android:src="@drawable/ic_wind"
             app:layout_constraintBottom_toBottomOf="@id/humidity"
             app:layout_constraintStart_toEndOf="@id/humidity"
-            android:src="@drawable/ic_wind" />
+            app:layout_constraintTop_toTopOf="@id/humidity" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/wind"
@@ -110,7 +110,8 @@
             android:layout_margin="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintBottom_toBottomOf="@id/temperature"
-app:layout_constraintStart_toEndOf="@id/wind_img"            tools:text="0.77" />
+            app:layout_constraintStart_toEndOf="@id/wind_img"
+            tools:text="0.77" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
