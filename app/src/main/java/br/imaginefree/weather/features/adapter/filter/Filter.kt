@@ -4,7 +4,7 @@ import android.widget.Filter
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.features.adapter.CityAdapter
 
-class CityFilter<T>(
+class Filter<T>(
     private val citiesFiltered: MutableList<T>,
     private val adapter: CityAdapter<T>,
     private val elements: MutableList<T>

@@ -12,7 +12,7 @@ import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.databinding.FragmentFavoritesBinding
 import br.imaginefree.weather.features.adapter.AdapterType
 import br.imaginefree.weather.features.adapter.CityAdapter
-import br.imaginefree.weather.features.adapter.filter.CityFilter
+import br.imaginefree.weather.features.adapter.filter.Filter
 import kotlin.concurrent.thread
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
@@ -52,7 +52,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
         binding.favoritesList.layoutManager = LinearLayoutManager(requireContext())
         binding.btnSearch.setOnClickListener {
             if (binding.searchName.text.toString().isNullOrBlank()) {
-                cityAdapter.filter.filter(CityFilter.NONE)
+                cityAdapter.filter.filter(Filter.NONE)
             }else{
                 cityAdapter.filter.filter(binding.searchName.text.toString())
             }
@@ -66,7 +66,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
                 cities.addAll(it)
                 activity?.runOnUiThread {
                     cityAdapter.notifyDataSetChanged()
-                    cityAdapter.filter.filter(CityFilter.NONE)
+                    cityAdapter.filter.filter(Filter.NONE)
                 }
             }
         }

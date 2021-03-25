@@ -2,7 +2,6 @@ package br.imaginefree.weather.features.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import br.imaginefree.weather.data.model.City
@@ -10,7 +9,7 @@ import br.imaginefree.weather.data.model.Forecast
 import br.imaginefree.weather.databinding.ItemCityBinding
 import br.imaginefree.weather.databinding.ItemFavoriteBinding
 import br.imaginefree.weather.databinding.ItemForecastBinding
-import br.imaginefree.weather.features.adapter.filter.CityFilter
+import br.imaginefree.weather.features.adapter.filter.Filter
 import br.imaginefree.weather.features.favorite.FavoriteViewHolder
 import br.imaginefree.weather.features.search.CityViewHolder
 import br.imaginefree.weather.features.forecast.ForecastViewHolder
@@ -21,12 +20,12 @@ class CityAdapter<T>(
         private val listener: ((Any) -> Unit)? = null,
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
-    private var filter: CityFilter<T>
+    private var filter: Filter<T>
     private val citiesFiltered: MutableList<T> = mutableListOf()
 
     init {
         citiesFiltered.addAll(elements)
-        filter = CityFilter(citiesFiltered, this, elements)
+        filter = Filter(citiesFiltered, this, elements)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -54,6 +53,6 @@ class CityAdapter<T>(
 
     override fun getItemCount() = citiesFiltered.size
 
-    override fun getFilter(): Filter = filter
+    override fun getFilter(): android.widget.Filter = filter
 
 }

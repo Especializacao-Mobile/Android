@@ -13,6 +13,7 @@ import br.imaginefree.weather.data.network.Service
 import br.imaginefree.weather.databinding.ActivityForecastBinding
 import br.imaginefree.weather.features.adapter.AdapterType
 import br.imaginefree.weather.features.adapter.CityAdapter
+import br.imaginefree.weather.features.adapter.filter.Filter
 import br.imaginefree.weather.utils.Settings
 import retrofit2.Call
 import retrofit2.Callback
@@ -59,6 +60,7 @@ class ForecastActivity : AppCompatActivity() {
                                 forecastList.clear()
                                 forecastList.addAll(it)
                                 cityAdapter.notifyDataSetChanged()
+                                cityAdapter.filter.filter(Filter.NONE)
                             }
                         }
 

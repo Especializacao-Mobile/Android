@@ -10,7 +10,7 @@ import br.imaginefree.weather.data.model.Weather
 @Dao
 interface WeatherDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(weather: Weather): Long
 
     @Update

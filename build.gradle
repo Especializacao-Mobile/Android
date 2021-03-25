@@ -1,5 +1,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+
+    if (!project.hasProperty('marvel_repository')) {
+        ext.weather_url = '"https://gateway.marvel.com/"'
+        def props = new Properties()
+        file('credentials.properties').withInputStream { props.load(it) }
+        ext.public_key = '"' + props.getProperty('weather.public.key') + '"'
+    }
+
     ext {
         kotlin_version = "1.4.31"
         retrofit_version = "2.9.0"

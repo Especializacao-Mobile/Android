@@ -15,6 +15,7 @@ import br.imaginefree.weather.data.network.Service
 import br.imaginefree.weather.databinding.FragmentCityBinding
 import br.imaginefree.weather.features.adapter.AdapterType
 import br.imaginefree.weather.features.adapter.CityAdapter
+import br.imaginefree.weather.features.adapter.filter.Filter
 import br.imaginefree.weather.features.forecast.ForecastActivity
 import br.imaginefree.weather.utils.Settings
 import retrofit2.Call
@@ -22,7 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import kotlin.concurrent.thread
 
-class CityFragment : Fragment(R.layout.fragment_city) {
+class CityFragment : Fragment(R.layout.fragment_city){
 
     private lateinit var binding: FragmentCityBinding
     private lateinit var cityAdapter: CityAdapter<City>
@@ -43,54 +44,52 @@ class CityFragment : Fragment(R.layout.fragment_city) {
         }
     }
 
-    private fun startForecastActivity(city: Any) {
+    private fun startForecastActivity(city: Any){
         val intent = Intent(requireContext(), ForecastActivity::class.java)
         intent.putExtra(ForecastActivity.CITY, city as City)
         startActivity(intent)
     }
 
-    private fun getInternalElements() {
+    private fun getInternalElements(){
         thread {
             cities.clear()
-            AppDatabase.getInstance(requireContext())
-                    ?.cityDao()
-                    ?.getCities()
-                    ?.forEach { citiesAndWeathers ->
-                        citiesAndWeathers.city.weather = citiesAndWeathers.weather
-                        cities.add(citiesAndWeathers.city)
-                    }
+            AppDatabase.getInstance(requireContext())?.cityDao()?.getCities()?.forEach { citiesAndWeathers ->
+                citiesAndWeathers.city.weather = citiesAndWeathers.weather
+                cities.add(citiesAndWeathers.city)
+            }
             activity?.runOnUiThread {
                 cityAdapter.notifyDataSetChanged()
             }
         }
     }
 
-    private fun getCities(searchField: String) {
+    private fun getCities(searchField: String){
         Service
-                .getService()
-                .getCity(searchField, Settings.getMeter(), Settings.getLanguage(), "b02f5abb291a5a402a86d45e3807c357")
-                .enqueue(object : Callback<BaseResponse<City>> {
-                    override fun onResponse(
-                            call: Call<BaseResponse<City>>,
-                            response: Response<BaseResponse<City>>
-                    ) {
-                        response.body()?.list?.let { citiesResponse ->
-                            cities.clear()
-                            cities.addAll(citiesResponse)
-                            cityAdapter.notifyDataSetChanged()
-                            saveCities()
-                        }
+            .getService()
+            .getCity(searchField, Settings.getMeter(), Settings.getLanguage(), "b02f5abb291a5a402a86d45e3807c357")
+            .enqueue(object : Callback<BaseResponse<City>> {
+                override fun onResponse(
+                    call: Call<BaseResponse<City>>,
+                    response: Response<BaseResponse<City>>
+                ) {
+                    response.body()?.list?.let {
+                        cities.clear()
+                        cities.addAll(it)
+                        cityAdapter.notifyDataSetChanged()
+                        cityAdapter.filter.filter(Filter.NONE)
+                        saveCities(it)
                     }
+                }
 
-                    override fun onFailure(call: Call<BaseResponse<City>>, t: Throwable) {
-                        t.printStackTrace()
-                    }
+                override fun onFailure(call: Call<BaseResponse<City>>, t: Throwable) {
+                    t.printStackTrace()
+                }
 
-                })
+            })
     }
 
-    private fun saveCities(){
-        cities.forEach { city ->
+    private fun saveCities(cities: List<City>){
+        cities.forEach{ city ->
             thread {
                 AppDatabase.getInstance(requireContext())?.cityDao()?.insert(city)
                 city.weather.forEach { weather ->
