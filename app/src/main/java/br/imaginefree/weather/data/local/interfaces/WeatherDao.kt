@@ -11,12 +11,12 @@ import br.imaginefree.weather.data.model.Weather
 interface WeatherDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(weather: Weather): Long
+    suspend fun insert(weather: Weather): Long
 
     @Update
-    fun update(weather: Weather)
+    suspend fun update(weather: Weather)
 
     @Delete
-    fun delete(weather: Weather)
+    suspend fun delete(weather: Weather)
     
 }

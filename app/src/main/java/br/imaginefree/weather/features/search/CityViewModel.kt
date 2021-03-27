@@ -3,18 +3,18 @@ package br.imaginefree.weather.features.search
 import androidx.lifecycle.*
 import br.imaginefree.weather.base.BaseModel
 import br.imaginefree.weather.base.BaseResponse
-import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.base.STATUS
-import br.imaginefree.weather.data.local.services.CityDaoService
-import br.imaginefree.weather.data.repository.services.CityService
+import br.imaginefree.weather.data.local.interfaces.CityDao
+import br.imaginefree.weather.data.local.interfaces.WeatherDao
 import br.imaginefree.weather.data.local.prefs.Settings
-import br.imaginefree.weather.data.local.services.WeatherDaoService
+import br.imaginefree.weather.data.model.City
+import br.imaginefree.weather.data.repository.services.CityService
 import kotlinx.coroutines.launch
 
 class CityViewModel(
         private val cityService: CityService,
-        private val cityDaoService: CityDaoService,
-        private val weatherDaoService: WeatherDaoService,
+        private val cityDao: CityDao,
+        private val weatherDao: WeatherDao,
         private val settings: Settings
 ) : ViewModel(), LifecycleObserver {
 
@@ -42,7 +42,7 @@ class CityViewModel(
         viewModelScope.launch {
             val list = arrayListOf<City>()
             val result =
-                    cityDaoService.getCitiesByName(searchName)
+                    cityDao.getCitiesByName(searchName)
             result.forEach { citiesAndWeathers ->
                 citiesAndWeathers.city.weather = citiesAndWeathers.weather
                 list.add(citiesAndWeathers.city)
@@ -59,10 +59,10 @@ class CityViewModel(
     private fun saveCities(cities: List<City>?) {
         viewModelScope.launch {
             cities?.forEach { city ->
-                cityDaoService.insert(city)
+                cityDao.insert(city)
                 city.weather.forEach { weather ->
                     weather.weatherOwnerId = city.cityId
-                    weatherDaoService.insert(weather)
+                    weatherDao.insert(weather)
                 }
             }
         }

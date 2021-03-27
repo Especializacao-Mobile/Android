@@ -8,24 +8,24 @@ import br.imaginefree.weather.data.model.CityWithWeathers
 interface CityDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(city: City): Long
+    suspend fun insert(city: City): Long
 
     @Update
-    fun update(city: City)
+    suspend fun update(city: City)
 
     @Delete
-    fun delete(city: City)
+    suspend fun delete(city: City)
 
     @Transaction
     @Query("select * from city where name = :searchName")
-    fun getCitiesByName(searchName: String): List<CityWithWeathers>
+    suspend fun getCitiesByName(searchName: String): List<CityWithWeathers>
 
     @Transaction
     @Query("select * from city")
-    fun getCities(): List<CityWithWeathers>
+    suspend fun getCities(): List<CityWithWeathers>
 
     @Transaction
     @Query("select * from city where favorite = 1")
-    fun getFavoriteCities(): List<City>
+    suspend fun getFavoriteCities(): List<City>
 
 }
