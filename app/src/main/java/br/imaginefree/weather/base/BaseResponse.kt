@@ -1,4 +1,6 @@
-package br.imaginefree.weather.data.model
+package br.imaginefree.weather.base
+
+import br.imaginefree.weather.data.model.City
 
 class BaseResponse<T> (
     val message: String? = null,

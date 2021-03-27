@@ -1,7 +1,7 @@
 package br.imaginefree.weather.data.network
 
 import br.imaginefree.weather.BuildConfig
-import br.imaginefree.weather.data.model.BaseResponse
+import br.imaginefree.weather.base.BaseResponse
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.model.Forecast
 import retrofit2.Call

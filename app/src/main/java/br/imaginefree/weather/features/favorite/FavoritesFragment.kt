@@ -5,27 +5,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.imaginefree.weather.R
-import br.imaginefree.weather.data.local.AppDatabase
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.databinding.FragmentFavoritesBinding
-import br.imaginefree.weather.features.adapter.ViewHolderType
 import br.imaginefree.weather.features.adapter.CityAdapter
+import br.imaginefree.weather.features.adapter.viewholder.ViewHolderType
 import br.imaginefree.weather.features.adapter.filter.Filter
-import kotlin.concurrent.thread
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
     private lateinit var binding: FragmentFavoritesBinding
     private lateinit var cityAdapter: CityAdapter<City>
     private val cities = ArrayList<City>()
+    private val favoritesViewModel: FavoritesViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentFavoritesBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -33,19 +34,33 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpViews()
-        loadFavorites()
+        setObservables()
+        favoritesViewModel.fetchFavorites()
+    }
+
+    private fun setObservables(){
+        favoritesViewModel.cityToDeleted.observe(viewLifecycleOwner, Observer { model ->
+            model.data?.let {
+                val index = cities.indexOf(it)
+                cities.remove(it)
+                cityAdapter.notifyItemRemoved(index)
+            }
+        })
+
+        favoritesViewModel.favoriteCities.observe(viewLifecycleOwner, Observer { model ->
+            model.data?.let {
+                cities.clear()
+                cities.addAll(it)
+                cityAdapter.notifyDataSetChanged()
+                cityAdapter.filter.filter(Filter.NONE)
+            }
+        })
     }
 
     private fun setUpViews(){
         cityAdapter = CityAdapter(cities, ViewHolderType.FAVORITE){
             (it as? City)?.let { city ->
-                city.favorite = false
-                /*thread {
-                    AppDatabase.getInstance(requireContext())?.cityDao()?.update(city)
-                    val index = cities.indexOf(city)
-                    cities.remove(city)
-                    activity?.runOnUiThread { cityAdapter.notifyItemRemoved(index) }
-                }*/
+                favoritesViewModel.removeFromFavorite(city)
             }
         }
         binding.favoritesList.adapter = cityAdapter
@@ -57,19 +72,6 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
                 cityAdapter.filter.filter(binding.searchName.text.toString())
             }
         }
-    }
-
-    private fun loadFavorites(){
-        /*thread {
-            AppDatabase.getInstance(requireContext())?.cityDao()?.getFavoriteCities()?.let {
-                cities.clear()
-                cities.addAll(it)
-                activity?.runOnUiThread {
-                    cityAdapter.notifyDataSetChanged()
-                    cityAdapter.filter.filter(Filter.NONE)
-                }
-            }
-        }*/
     }
 
 }

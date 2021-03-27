@@ -2,6 +2,7 @@ package br.imaginefree.weather.di
 
 import androidx.room.Room
 import br.imaginefree.weather.data.local.AppDatabase
+import br.imaginefree.weather.data.local.CityDaoService
 import br.imaginefree.weather.data.local.Settings
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -18,6 +19,7 @@ val databaseModule = module {
 
     single { get<AppDatabase>().cityDao() }
     single { get<AppDatabase>().weatherDao() }
+    single { CityDaoService(get()) }
     single { Settings() }
 
 }

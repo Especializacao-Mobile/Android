@@ -1,4 +1,4 @@
-package br.imaginefree.weather.data.model
+package br.imaginefree.weather.base
 
 data class BaseModel<T>(
     val status: STATUS,

@@ -11,7 +11,7 @@ val repositoryModule = module {
     }
 
     single {
-        ForecastService(get())
+        ForecastService(get(), get())
     }
 
 }

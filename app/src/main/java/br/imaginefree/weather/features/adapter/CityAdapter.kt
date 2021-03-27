@@ -13,11 +13,12 @@ import br.imaginefree.weather.features.adapter.filter.Filter
 import br.imaginefree.weather.features.adapter.viewholder.FavoriteViewHolder
 import br.imaginefree.weather.features.adapter.viewholder.CityViewHolder
 import br.imaginefree.weather.features.adapter.viewholder.ForecastViewHolder
+import br.imaginefree.weather.features.adapter.viewholder.ViewHolderType
 
 class CityAdapter<T>(
-    elements: ArrayList<T>,
-    private val viewHolderType: ViewHolderType,
-    private val listener: ((Any) -> Unit)? = null,
+        elements: ArrayList<T>,
+        private val viewHolderType: ViewHolderType,
+        private val listener: ((Any) -> Unit)? = null,
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
     private var filter: Filter<T>

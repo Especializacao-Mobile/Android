@@ -1,9 +1,9 @@
 package br.imaginefree.weather.data.repository
 
-import br.imaginefree.weather.data.model.BaseModel
-import br.imaginefree.weather.data.model.BaseResponse
+import br.imaginefree.weather.base.BaseModel
+import br.imaginefree.weather.base.BaseResponse
 import br.imaginefree.weather.data.model.City
-import br.imaginefree.weather.data.model.STATUS
+import br.imaginefree.weather.base.STATUS
 import br.imaginefree.weather.data.local.Settings
 import br.imaginefree.weather.data.network.coroutines.Api
 

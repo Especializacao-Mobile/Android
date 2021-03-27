@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.imaginefree.weather.R
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.databinding.FragmentCityBinding
-import br.imaginefree.weather.features.adapter.ViewHolderType
+import br.imaginefree.weather.features.adapter.viewholder.ViewHolderType
 import br.imaginefree.weather.features.adapter.CityAdapter
 import br.imaginefree.weather.features.adapter.filter.Filter
 import br.imaginefree.weather.features.forecast.ForecastActivity
@@ -22,13 +22,13 @@ class CityFragment : Fragment(R.layout.fragment_city) {
     private lateinit var binding: FragmentCityBinding
     private lateinit var cityAdapter: CityAdapter<City>
     private val cities = ArrayList<City>()
-    private val cityFragmentViewModel: CityFragmentViewModel by viewModel()
+    private val cityViewModel: CityViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCityBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -39,8 +39,7 @@ class CityFragment : Fragment(R.layout.fragment_city) {
         binding.weatherList.adapter = cityAdapter
         binding.weatherList.layoutManager = LinearLayoutManager(requireContext())
         binding.btnSearch.setOnClickListener {
-            cityFragmentViewModel.fetchCitiesByName(
-                requireContext(),
+            cityViewModel.fetchCitiesByName(
                 binding.searchField.text.toString()
             )
         }
@@ -54,7 +53,7 @@ class CityFragment : Fragment(R.layout.fragment_city) {
     }
 
     private fun setUpObservable() {
-        cityFragmentViewModel.cityInfoObservable.observe(viewLifecycleOwner, Observer { model ->
+        cityViewModel.cityInfo.observe(viewLifecycleOwner, Observer { model ->
             model.data?.list?.let {
                 cities.clear()
                 cities.addAll(it)
