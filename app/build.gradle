@@ -56,44 +56,42 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    //retrofit
+    // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
-    //okhttp
+    // OkHttp
     implementation "com.squareup.okhttp3:logging-interceptor:$retrofit_logging"
     implementation "com.squareup.okhttp3:okhttp:$okhttp3"
 
-    //Navigation
+    // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
 
-    //coil
+    // Coil
     implementation "io.coil-kt:coil:$coil_version"
 
-    //coroutine
+    // Coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
-    //Coroutines adapter usado na configuração do retrofit
+    // Coroutines adapter usado na configuração do retrofit
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
 
-    //Koin
+    // Koin
     implementation 'org.koin:koin-android:2.0.1'
     implementation 'org.koin:koin-androidx-viewmodel:2.0.1'
 
     // Room
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-    // optional - Kotlin Extensions and Coroutines support for Room
+    // Optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
-    // optional - RxJava support for Room
-    //implementation "androidx.room:room-rxjava2:$room_version"
 
-    //Jetpack Security
-    //implementation "androidx.security:security-crypto:1.1.0-alpha03"
+    // Jetpack Security
+    // Implementation "androidx.security:security-crypto:1.1.0-alpha03"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
