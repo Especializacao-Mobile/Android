@@ -1,5 +1,6 @@
-package br.imaginefree.weather.data.local
+package br.imaginefree.weather.data.local.services
 
+import br.imaginefree.weather.data.local.interfaces.CityDao
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.model.CityWithWeathers
 

@@ -1,16 +1,18 @@
 package br.imaginefree.weather.features.favorite
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import br.imaginefree.weather.base.BaseModel
 import br.imaginefree.weather.base.STATUS
-import br.imaginefree.weather.data.local.CityDao
+import br.imaginefree.weather.data.local.services.CityDaoService
 import br.imaginefree.weather.data.model.City
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class FavoritesViewModel(
-    private val cityDao: CityDao
+        private val cityDaoService: CityDaoService
 ) : ViewModel(), LifecycleObserver {
 
     private val _cityToDeleted = MutableLiveData<BaseModel<City>>()
@@ -19,24 +21,20 @@ class FavoritesViewModel(
     private val _favoriteCities = MutableLiveData<BaseModel<List<City>>>()
     val favoriteCities: LiveData<BaseModel<List<City>>> = _favoriteCities
 
-    fun removeFromFavorite(city: City){
+    fun removeFromFavorite(city: City) {
         _cityToDeleted.postValue(BaseModel(STATUS.LOADING))
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                city.favorite = false
-                cityDao.update(city)
-                _cityToDeleted.postValue(BaseModel(STATUS.SUCCESS, city))
-            }
+            city.favorite = false
+            cityDaoService.update(city)
+            _cityToDeleted.postValue(BaseModel(STATUS.SUCCESS, city))
         }
     }
 
-    fun fetchFavorites(){
+    fun fetchFavorites() {
         _favoriteCities.postValue(BaseModel(STATUS.LOADING))
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                val cities = cityDao.getFavoriteCities()
-                _favoriteCities.postValue(BaseModel(STATUS.SUCCESS, cities))
-            }
+            val cities = cityDaoService.getFavoriteCities()
+            _favoriteCities.postValue(BaseModel(STATUS.SUCCESS, cities))
         }
     }
 

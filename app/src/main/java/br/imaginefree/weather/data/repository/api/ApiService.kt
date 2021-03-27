@@ -1,4 +1,4 @@
-package br.imaginefree.weather.data.network.coroutines
+package br.imaginefree.weather.data.repository.api
 
 import br.imaginefree.weather.BuildConfig
 import br.imaginefree.weather.base.BaseResponse
@@ -8,7 +8,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface Api {
+interface ApiService {
 
     @GET("find")
     suspend fun getCity(

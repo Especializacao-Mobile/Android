@@ -2,6 +2,8 @@ package br.imaginefree.weather.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import br.imaginefree.weather.data.local.interfaces.CityDao
+import br.imaginefree.weather.data.local.interfaces.WeatherDao
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.model.Weather
 

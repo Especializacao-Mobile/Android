@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import br.imaginefree.weather.R
-import br.imaginefree.weather.data.local.Settings
+import br.imaginefree.weather.data.local.prefs.Settings
 import br.imaginefree.weather.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.android.ext.android.inject

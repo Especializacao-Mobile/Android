@@ -1,8 +1,7 @@
 package br.imaginefree.weather.di
 
 import br.imaginefree.weather.BuildConfig
-import br.imaginefree.weather.data.network.coroutines.Api
-import com.google.gson.Gson
+import br.imaginefree.weather.data.repository.api.ApiService
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -44,8 +43,8 @@ val networkModule = module {
             .build()
     }
 
-    single<Api> {
+    single<ApiService> {
         val retrofit: Retrofit = get()
-        retrofit.create<Api>(Api::class.java)
+        retrofit.create<ApiService>(ApiService::class.java)
     }
 }

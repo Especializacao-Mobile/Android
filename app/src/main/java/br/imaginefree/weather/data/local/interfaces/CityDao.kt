@@ -1,4 +1,4 @@
-package br.imaginefree.weather.data.local
+package br.imaginefree.weather.data.local.interfaces
 
 import androidx.room.*
 import br.imaginefree.weather.data.model.City

@@ -4,17 +4,15 @@ import androidx.lifecycle.*
 import br.imaginefree.weather.base.BaseModel
 import br.imaginefree.weather.base.BaseResponse
 import br.imaginefree.weather.base.STATUS
-import br.imaginefree.weather.data.local.CityDao
+import br.imaginefree.weather.data.local.services.CityDaoService
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.model.Forecast
-import br.imaginefree.weather.data.repository.ForecastService
-import kotlinx.coroutines.Dispatchers
+import br.imaginefree.weather.data.repository.services.ForecastService
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ForecastViewModel(
-    private val cityDao: CityDao,
-    private val forecastService: ForecastService
+        private val cityDaoService: CityDaoService,
+        private val forecastService: ForecastService
 ): ViewModel(), LifecycleObserver {
 
     private val _savedCity = MutableLiveData<BaseModel<City>>()
@@ -26,11 +24,9 @@ class ForecastViewModel(
     fun saveFavorite(city: City){
         _savedCity.postValue(BaseModel(STATUS.LOADING))
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
                 city.favorite = true
-                cityDao.update(city)
+                cityDaoService.update(city)
                 _savedCity.postValue(BaseModel(STATUS.SUCCESS, city))
-            }
         }
     }
 

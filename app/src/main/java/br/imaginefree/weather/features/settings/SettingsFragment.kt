@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.imaginefree.weather.R
-import br.imaginefree.weather.data.local.Settings
 import br.imaginefree.weather.databinding.FragmentSettingsBinding
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private lateinit var binding: FragmentSettingsBinding
-    private val settings: Settings by inject()
+    private val settingsViewModel: SettingsViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,25 +26,30 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpView()
+        setChangeListeners()
     }
 
     private fun setUpView() {
-        binding.celsius.isChecked = settings.isMetric()
-        binding.fahrenheit.isChecked = settings.isImperial()
+        binding.celsius.isChecked = settingsViewModel.isMetric()
+        binding.fahrenheit.isChecked = settingsViewModel.isImperial()
 
-        binding.offline.isChecked = !settings.isOnLine()
-        binding.online.isChecked = settings.isOnLine()
+        binding.offline.isChecked = !settingsViewModel.isOnLine()
+        binding.online.isChecked = settingsViewModel.isOnLine()
 
-        binding.pt.isChecked = settings.isPT()
-        binding.en.isChecked = settings.isEN()
+        binding.pt.isChecked = settingsViewModel.isPT()
+        binding.en.isChecked = settingsViewModel.isEN()
+
+    }
+
+    private fun setChangeListeners(){
 
         binding.degrees.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 binding.celsius.id -> {
-                    setElement(settings.METRIC, settings.IMPERIAL)
+                    settingsViewModel.setMetric()
                 }
                 binding.fahrenheit.id -> {
-                    setElement(settings.IMPERIAL, settings.METRIC)
+                    settingsViewModel.setImperial()
                 }
             }
         }
@@ -53,10 +57,10 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.language.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 binding.pt.id -> {
-                    setElement(settings.LANG_PT, settings.LANG_EN)
+                    settingsViewModel.setPT()
                 }
                 binding.en.id -> {
-                    setElement(settings.LANG_EN, settings.LANG_PT)
+                    settingsViewModel.setEN()
                 }
             }
         }
@@ -64,24 +68,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.internetMode.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 binding.offline.id -> {
-                    setElement(null, settings.ONLINE_MODE)
+                    settingsViewModel.setOffLine()
                 }
                 binding.online.id -> {
-                    setElement(settings.ONLINE_MODE, null)
+                    settingsViewModel.setOnLine()
                 }
             }
-        }
-    }
-
-    private fun setElement(keyOne: String? = null, keyTwo: String? = null){
-        settings.getConfigPreferencesEditor(requireContext()).apply {
-            keyOne?.let {
-                putBoolean(it, true)
-            }
-            keyTwo?.let {
-                putBoolean(it, false)
-            }
-            commit()
         }
     }
 

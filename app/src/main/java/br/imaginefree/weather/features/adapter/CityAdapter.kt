@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import br.imaginefree.weather.data.local.prefs.Settings
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.data.model.Forecast
 import br.imaginefree.weather.databinding.ItemCityBinding

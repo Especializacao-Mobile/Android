@@ -1,23 +1,20 @@
 package br.imaginefree.weather.features.search
 
 import androidx.lifecycle.*
-import br.imaginefree.weather.data.local.CityDao
 import br.imaginefree.weather.base.BaseModel
 import br.imaginefree.weather.base.BaseResponse
 import br.imaginefree.weather.data.model.City
 import br.imaginefree.weather.base.STATUS
-import br.imaginefree.weather.data.local.CityDaoService
-import br.imaginefree.weather.data.repository.CityService
-import br.imaginefree.weather.data.local.Settings
-import br.imaginefree.weather.data.local.WeatherDao
-import kotlinx.coroutines.Dispatchers
+import br.imaginefree.weather.data.local.services.CityDaoService
+import br.imaginefree.weather.data.repository.services.CityService
+import br.imaginefree.weather.data.local.prefs.Settings
+import br.imaginefree.weather.data.local.services.WeatherDaoService
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class CityViewModel(
         private val cityService: CityService,
-        private val cityDao: CityDaoService,
-        private val weatherDao: WeatherDao,
+        private val cityDaoService: CityDaoService,
+        private val weatherDaoService: WeatherDaoService,
         private val settings: Settings
 ) : ViewModel(), LifecycleObserver {
 
@@ -45,7 +42,7 @@ class CityViewModel(
         viewModelScope.launch {
             val list = arrayListOf<City>()
             val result =
-                    cityDao.getCitiesByName(searchName)
+                    cityDaoService.getCitiesByName(searchName)
             result.forEach { citiesAndWeathers ->
                 citiesAndWeathers.city.weather = citiesAndWeathers.weather
                 list.add(citiesAndWeathers.city)
@@ -62,10 +59,10 @@ class CityViewModel(
     private fun saveCities(cities: List<City>?) {
         viewModelScope.launch {
             cities?.forEach { city ->
-                cityDao.insert(city)
+                cityDaoService.insert(city)
                 city.weather.forEach { weather ->
                     weather.weatherOwnerId = city.cityId
-                    weatherDao.insert(weather)
+                    weatherDaoService.insert(weather)
                 }
             }
         }

@@ -1,4 +1,4 @@
-package br.imaginefree.weather.data.local
+package br.imaginefree.weather.data.local.interfaces
 
 import androidx.room.Dao
 import androidx.room.Delete

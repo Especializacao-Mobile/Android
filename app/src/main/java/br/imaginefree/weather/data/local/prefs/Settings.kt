@@ -1,4 +1,4 @@
-package br.imaginefree.weather.data.local
+package br.imaginefree.weather.data.local.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -10,11 +10,11 @@ import android.content.SharedPreferences
 
 class Settings {
     private val CONFIG_PREFERENCES = "CONFIG_PREFERENCES"
-    val METRIC = "metric"
-    val IMPERIAL = "imperial"
-    val LANG_PT = "PT"
-    val LANG_EN = "EN"
-    val ONLINE_MODE = "ONLINE_MODE"
+    val metric = "metric"
+    val imperial = "imperial"
+    val langPT = "PT"
+    val langEN = "EN"
+    val onlineMode = "onlineMode"
 
     private var configPreferences: SharedPreferences? = null
 
@@ -28,35 +28,35 @@ class Settings {
     }
 
     fun isPT(): Boolean {
-        return configPreferences?.getBoolean(LANG_PT, false) ?: false
+        return configPreferences?.getBoolean(langPT, false) ?: false
     }
 
     fun isEN(): Boolean {
-        return configPreferences?.getBoolean(LANG_EN, false) ?: false
+        return configPreferences?.getBoolean(langEN, false) ?: false
     }
 
     fun isOnLine(): Boolean {
-        return configPreferences?.getBoolean(ONLINE_MODE, false) ?: false
+        return configPreferences?.getBoolean(onlineMode, false) ?: false
     }
 
     fun isMetric(): Boolean {
-        return configPreferences?.getBoolean(METRIC, false) ?: false
+        return configPreferences?.getBoolean(metric, false) ?: false
     }
 
     fun isImperial(): Boolean {
-        return configPreferences?.getBoolean(IMPERIAL, false) ?: false
+        return configPreferences?.getBoolean(imperial, false) ?: false
     }
 
     fun getLanguage(): String {
         return when {
             isEN() -> {
-                LANG_EN
+                langEN
             }
             isPT() -> {
-                LANG_PT
+                langPT
             }
             else -> {
-                LANG_PT
+                langPT
             }
         }
     }
@@ -64,13 +64,13 @@ class Settings {
     fun getMeter(): String {
         return when {
             isMetric() -> {
-                METRIC
+                metric
             }
             isImperial() -> {
-                IMPERIAL
+                imperial
             }
             else -> {
-                METRIC
+                metric
             }
         }
     }
