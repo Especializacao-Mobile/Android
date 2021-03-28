@@ -1,14 +1,10 @@
-package br.imaginefree.weather.base
+package br.imaginefree.weather.data.model
 
 data class BaseModel<T>(
-    val status: STATUS,
+    val status: Status,
     var data: T? = null,
     val message: String? = null
 )
-
-enum class STATUS {
-    LOADING, SUCCESS, ERROR
-}
 
 /**
  * Another approach

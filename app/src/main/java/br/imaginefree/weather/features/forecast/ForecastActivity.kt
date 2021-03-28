@@ -48,14 +48,14 @@ class ForecastActivity : AppCompatActivity() {
     }
 
     private fun setUpObservable(){
-        forecastViewModel.savedCity.observe(this, Observer {
+        forecastViewModel.savedCity.observe(this, {
             Toast.makeText(this, getString(R.string.saved_successfully), Toast.LENGTH_LONG).show()
         })
 
-        forecastViewModel.forecast.observe(this, Observer { model ->
+        forecastViewModel.forecast.observe(this, { model ->
             model.data?.let {
                 forecastList.clear()
-                forecastList.addAll(it.list)
+                forecastList.addAll(it)
                 cityAdapter.notifyDataSetChanged()
                 cityAdapter.filter.filter(Filter.NONE)
             }

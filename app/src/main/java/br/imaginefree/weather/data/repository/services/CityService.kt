@@ -1,33 +1,32 @@
 package br.imaginefree.weather.data.repository.services
 
-import br.imaginefree.weather.base.BaseModel
-import br.imaginefree.weather.base.BaseResponse
-import br.imaginefree.weather.data.model.City
-import br.imaginefree.weather.base.STATUS
 import br.imaginefree.weather.data.local.prefs.Settings
+import br.imaginefree.weather.data.model.BaseModel
+import br.imaginefree.weather.data.model.City
+import br.imaginefree.weather.data.model.Status
 import br.imaginefree.weather.data.repository.api.ApiService
 
 class CityService(private val apiService: ApiService, private val settings: Settings) {
 
-    suspend fun getCitiesByName(searchedName: String): BaseModel<BaseResponse<City>> {
+    suspend fun getCitiesByName(searchedName: String): BaseModel<List<City>> {
 
-        lateinit var resultResponse: BaseModel<BaseResponse<City>>
+        lateinit var resultResponse: BaseModel<List<City>>
 
         val result = runCatching {
             val response = apiService.getCity(searchedName, settings.getMeter(), settings.getLanguage())
             resultResponse = if (response.isSuccessful) {
                 response.body()?.let {
-                    BaseModel(STATUS.SUCCESS, it)
+                    BaseModel(Status.SUCCESS, it.list)
                 } ?: run {
-                    BaseModel(STATUS.ERROR, null)
+                    BaseModel(Status.ERROR, null)
                 }
             } else {
-                BaseModel(STATUS.ERROR, null)
+                BaseModel(Status.ERROR, null)
             }
         }
 
         return if (result.isFailure) {
-            return BaseModel(STATUS.ERROR, null)
+            return BaseModel(Status.ERROR, null)
         } else {
             resultResponse
         }

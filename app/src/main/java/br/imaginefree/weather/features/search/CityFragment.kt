@@ -53,8 +53,8 @@ class CityFragment : Fragment(R.layout.fragment_city) {
     }
 
     private fun setUpObservable() {
-        cityViewModel.cityInfo.observe(viewLifecycleOwner, Observer { model ->
-            model.data?.list?.let {
+        cityViewModel.cityInfo.observe(viewLifecycleOwner, { model ->
+            model.data?.let {
                 cities.clear()
                 cities.addAll(it)
                 cityAdapter.notifyDataSetChanged()

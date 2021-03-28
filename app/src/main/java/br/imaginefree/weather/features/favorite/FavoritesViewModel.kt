@@ -1,14 +1,10 @@
 package br.imaginefree.weather.features.favorite
 
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import br.imaginefree.weather.base.BaseModel
-import br.imaginefree.weather.base.STATUS
+import androidx.lifecycle.*
 import br.imaginefree.weather.data.local.interfaces.CityDao
+import br.imaginefree.weather.data.model.BaseModel
 import br.imaginefree.weather.data.model.City
+import br.imaginefree.weather.data.model.Status
 import kotlinx.coroutines.launch
 
 class FavoritesViewModel(
@@ -22,19 +18,19 @@ class FavoritesViewModel(
     val favoriteCities: LiveData<BaseModel<List<City>>> = _favoriteCities
 
     fun removeFromFavorite(city: City) {
-        _cityToDeleted.postValue(BaseModel(STATUS.LOADING))
+        _cityToDeleted.postValue(BaseModel(Status.LOADING))
         viewModelScope.launch {
             city.favorite = false
             cityDao.update(city)
-            _cityToDeleted.postValue(BaseModel(STATUS.SUCCESS, city))
+            _cityToDeleted.postValue(BaseModel(Status.SUCCESS, city))
         }
     }
 
     fun fetchFavorites() {
-        _favoriteCities.postValue(BaseModel(STATUS.LOADING))
+        _favoriteCities.postValue(BaseModel(Status.LOADING))
         viewModelScope.launch {
             val cities = cityDao.getFavoriteCities()
-            _favoriteCities.postValue(BaseModel(STATUS.SUCCESS, cities))
+            _favoriteCities.postValue(BaseModel(Status.SUCCESS, cities))
         }
     }
 

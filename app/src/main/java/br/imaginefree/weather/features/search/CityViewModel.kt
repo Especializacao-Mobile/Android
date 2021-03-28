@@ -1,13 +1,12 @@
 package br.imaginefree.weather.features.search
 
 import androidx.lifecycle.*
-import br.imaginefree.weather.base.BaseModel
-import br.imaginefree.weather.base.BaseResponse
-import br.imaginefree.weather.base.STATUS
 import br.imaginefree.weather.data.local.interfaces.CityDao
 import br.imaginefree.weather.data.local.interfaces.WeatherDao
 import br.imaginefree.weather.data.local.prefs.Settings
+import br.imaginefree.weather.data.model.BaseModel
 import br.imaginefree.weather.data.model.City
+import br.imaginefree.weather.data.model.Status
 import br.imaginefree.weather.data.repository.services.CityService
 import kotlinx.coroutines.launch
 
@@ -18,8 +17,8 @@ class CityViewModel(
         private val settings: Settings
 ) : ViewModel(), LifecycleObserver {
 
-    private val _cityInfo = MutableLiveData<BaseModel<BaseResponse<City>>>()
-    val cityInfo: LiveData<BaseModel<BaseResponse<City>>> = _cityInfo
+    private val _cityInfo = MutableLiveData<BaseModel<List<City>>>()
+    val cityInfo: LiveData<BaseModel<List<City>>> = _cityInfo
 
     fun fetchCitiesByName(searchName: String) {
         if (settings.isOnLine()) {
@@ -30,10 +29,10 @@ class CityViewModel(
     }
 
     private fun fetchByNameOnLine(searchName: String) {
-        _cityInfo.postValue(BaseModel(STATUS.LOADING))
+        _cityInfo.postValue(BaseModel(Status.LOADING))
         viewModelScope.launch {
             val response = cityService.getCitiesByName(searchName)
-            saveCities(response.data?.list)
+            saveCities(response.data)
             _cityInfo.postValue(response)
         }
     }
@@ -49,9 +48,7 @@ class CityViewModel(
             }
             _cityInfo.postValue(
                     BaseModel(
-                            STATUS.SUCCESS,
-                            BaseResponse("Ok", 200, list.size, list)
-                    )
+                            Status.SUCCESS, list)
             )
         }
     }

@@ -1,4 +1,4 @@
-package br.imaginefree.weather.base
+package br.imaginefree.weather.data.repository.reponse
 
 import br.imaginefree.weather.data.model.City
 
