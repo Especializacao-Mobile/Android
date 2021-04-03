@@ -11,7 +11,7 @@ val viewModelModule = module {
 
     viewModel { CityViewModel(get(), get(), get(), get()) }
     viewModel { FavoritesViewModel(get()) }
-    viewModel { ForecastViewModel(get(), get()) }
+    viewModel { ForecastViewModel(get(), get(), get(), get()) }
     viewModel { SettingsViewModel(get(), get()) }
 
 }

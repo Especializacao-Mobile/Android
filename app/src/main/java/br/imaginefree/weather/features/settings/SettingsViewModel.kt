@@ -31,11 +31,11 @@ class SettingsViewModel(
     }
 
     fun setOnLine(){
-        setElement(null, settings.onlineMode)
+        setElement(settings.onlineMode, null)
     }
 
     fun setOffLine(){
-        setElement(settings.onlineMode, null)
+        setElement(null, settings.onlineMode)
     }
 
     fun isMetric(): Boolean {

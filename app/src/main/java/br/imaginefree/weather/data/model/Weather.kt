@@ -14,6 +14,7 @@ data class Weather(
     @PrimaryKey
     var weatherId: Long = 0,
     var weatherOwnerId: Long = 0,
+    var forecastOwnerId: Long = 0,
     var main: String = "",
     var description: String = "",
     var icon: String = ""
