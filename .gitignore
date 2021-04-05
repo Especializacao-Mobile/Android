@@ -84,3 +84,5 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 /app/src/debug/res/values/google_maps_api.xml
+/.idea/
+/gradle/
