@@ -12,6 +12,10 @@ val constraints = Constraints.Builder()
     .setRequiredNetworkType(NetworkType.CONNECTED)
     .build()
 
+val unzipWorker = OneTimeWorkRequest.Builder(UnzipWorker::class.java)
+    .setConstraints(constraints)
+    .build()
+
 val download = OneTimeWorkRequest
     .Builder(DownloadWorker::class.java)
     .setConstraints(constraints)
@@ -26,8 +30,4 @@ val downloadImages = OneTimeWorkRequest
     .setInputData(
         Data.Builder().putString("URL", "https://github.com/haldny/imagens/raw/main/cidades.zip").build()
     )
-    .build()
-
-val unzipWorker = OneTimeWorkRequest.Builder(UnzipWorker::class.java)
-    .setConstraints(constraints)
     .build()
