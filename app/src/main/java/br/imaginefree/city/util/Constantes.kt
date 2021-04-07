@@ -8,6 +8,8 @@ import br.imaginefree.city.bg.DownloadImageWorker
 import br.imaginefree.city.bg.DownloadWorker
 import br.imaginefree.city.bg.UnzipWorker
 
+const val notificationWarning = "Worker Status"
+
 val constraints = Constraints.Builder()
     .setRequiredNetworkType(NetworkType.CONNECTED)
     .build()

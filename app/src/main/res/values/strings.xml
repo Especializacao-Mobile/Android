@@ -3,4 +3,11 @@
     <string name="title_activity_maps">Map</string>
     <string name="start_background_process">Start Background Process</string>
     <string name="list_cities">List Cities</string>
+    <string name="downloaded_data">Downloaded Data</string>
+    <string name="doanloading_data">Downloading Data</string>
+    <string name="downloaded_images">Downloaded Images</string>
+    <string name="downloading_images">Downloading Images</string>
+    <string name="notification_channel">NOTIFICATION_CHANNEL</string>
+    <string name="work_manager_app">WORK_MANAGER_APP</string>
+    <string name="hello_daivid">Hello Daivid!</string>
 </resources>

@@ -8,7 +8,7 @@ class CityViewHolder(private val binding: ItemCityBinding): RecyclerView.ViewHol
 
     fun bind(city: City, listener: (city: City) -> Unit){
         binding.cityName.text = city.local
-        binding.cityPrice.text = city.price
+        binding.cityPrice.text = city.preco
         binding.root.setOnClickListener {
             listener(city)
         }

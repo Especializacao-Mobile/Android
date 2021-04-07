@@ -61,8 +61,4 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         return super.onCreateOptionsMenu(menu)
     }
 
-    private fun doBackgroundJobs(){
-        Toast.makeText(this, "Start Background Jobs", Toast.LENGTH_LONG).show()
-    }
-
 }

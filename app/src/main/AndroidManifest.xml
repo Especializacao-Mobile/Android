@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.City">
-        <activity android:name=".feature.CityDetailsActivity"></activity>
+        <activity android:name=".feature.CityDetailsActivity" android:parentActivityName=".feature.CitiesActivity"/>
         <activity android:name=".feature.CitiesActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
