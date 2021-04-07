@@ -12,7 +12,9 @@ class UnzipWorker(context: Context, workerParams: WorkerParameters) :
 
     override fun doWork(): Result {
         val zipFileName = File(applicationContext.filesDir, "images.zip")
-
+        /**
+         * Copy/Paste From https://stackoverflow.com/questions/46627357/unzip-a-file-in-kotlin-script-kts
+         */
         ZipFile(zipFileName).use { zip ->
             zip.entries().asSequence().forEach { entry ->
                 if (!entry.name.startsWith("__MACOSX/")) {
@@ -24,7 +26,6 @@ class UnzipWorker(context: Context, workerParams: WorkerParameters) :
                 }
             }
         }
-
         return Result.success(Data.Builder().putString("zip_path", "/unzip").build())
     }
 }

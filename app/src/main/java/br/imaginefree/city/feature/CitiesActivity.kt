@@ -3,6 +3,7 @@ package br.imaginefree.city.feature
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.imaginefree.city.bg.createChannelNotifications
 import br.imaginefree.city.databinding.ActivityCitiesBinding
@@ -26,8 +27,26 @@ class CitiesActivity : AppCompatActivity() {
         setUpView()
         createChannelNotifications(this@CitiesActivity)
         setUpDownloadImagesWorker(this@CitiesActivity)
-        setUpDownloadWorker(this@CitiesActivity, cities, cityAdapter)
+        setUpDownloadWorker(this@CitiesActivity, {
+            cities.addAll(it)
+            cityAdapter.notifyDataSetChanged()
+            setListView()
+        }, {
+            setUpError()
+        })
         initWorkManagers(this@CitiesActivity)
+    }
+
+    private fun setListView(){
+        binding.progressCircular.isVisible = false
+        binding.rvListCities.isVisible = true
+        binding.errorLoading.isVisible = false
+    }
+
+    private fun setUpError(){
+        binding.progressCircular.isVisible = false
+        binding.rvListCities.isVisible = false
+        binding.errorLoading.isVisible = true
     }
 
     private fun setUpView() {

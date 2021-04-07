@@ -10,4 +10,5 @@
     <string name="notification_channel">NOTIFICATION_CHANNEL</string>
     <string name="work_manager_app">WORK_MANAGER_APP</string>
     <string name="hello_daivid">Hello Daivid!</string>
+    <string name="something_went_wrong_loading_the_cities_information">Something went wrong loading the cities information!</string>
 </resources>

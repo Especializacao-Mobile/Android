@@ -57,7 +57,11 @@ fun setUpDownloadImagesWorker(context: AppCompatActivity) {
     }
 }
 
-fun setUpDownloadWorker(context: AppCompatActivity, cities: ArrayList<City>, adapter: CityAdapter) {
+fun setUpDownloadWorker(
+    context: AppCompatActivity,
+    update: (cities: ArrayList<City>) -> Unit,
+    error: () -> Unit
+) {
     WorkManager.getInstance(context).apply {
 
         getWorkInfoByIdLiveData(download.id)
@@ -69,9 +73,11 @@ fun setUpDownloadWorker(context: AppCompatActivity, cities: ArrayList<City>, ada
                             data,
                             object : TypeToken<Promotions>() {}.type
                         )
-
-                        cities.addAll(citiesDownloaded.pacotes)
-                        adapter.notifyDataSetChanged()
+                        citiesDownloaded?.let { promotions ->
+                            update(promotions.pacotes)
+                        } ?: run {
+                            error()
+                        }
 
                         val builder = NotificationCompat.Builder(
                             context,

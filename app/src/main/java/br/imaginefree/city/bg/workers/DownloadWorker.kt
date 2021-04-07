@@ -18,21 +18,20 @@ class DownloadWorker(context: Context, workerParams: WorkerParameters) :
     override fun doWork(): Result {
 
         val url = URL(inputData.getString("URL"))
-
         val result = StringBuilder()
-
         try {
-            urlConnection = url.openConnection() as HttpURLConnection?
-            urlConnection?.doInput = true
-            urlConnection?.connectTimeout = 3000
-            urlConnection?.readTimeout = 3000
-
+            urlConnection = (url.openConnection() as HttpURLConnection?)
+            urlConnection?.let {
+                it.apply {
+                    doInput = true
+                    connectTimeout = 3000
+                    readTimeout = 3000
+                }
+            }
             if (urlConnection?.responseCode == HttpURLConnection.HTTP_OK) {
                 val stream = BufferedInputStream(urlConnection?.inputStream)
                 val reader = BufferedReader(InputStreamReader(stream))
-
                 var line: String?
-
                 do {
                     line = reader.readLine()
                     if (line == null) break
@@ -45,9 +44,7 @@ class DownloadWorker(context: Context, workerParams: WorkerParameters) :
             urlConnection?.disconnect()
         }
 
-        val outputData = Data.Builder().putString("response", result.toString()).build()
-        Thread.sleep(5000)
-        return Result.success(outputData)
+        return Result.success(Data.Builder().putString("response", result.toString()).build())
     }
 
 }
