@@ -1,9 +1,11 @@
-package br.imaginefree.city
+package br.imaginefree.city.feature.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import br.imaginefree.city.feature.viewmodel.CityViewHolder
 import br.imaginefree.city.databinding.ItemCityBinding
+import br.imaginefree.city.model.City
 
 class CityAdapter(
     private val elements: ArrayList<City>,

@@ -1,4 +1,4 @@
-package br.imaginefree.city
+package br.imaginefree.city.model
 
 data class City(
     val local: String = "",

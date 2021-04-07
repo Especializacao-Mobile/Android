@@ -1,4 +1,4 @@
-package br.imaginefree.city
+package br.imaginefree.city.feature
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import br.imaginefree.city.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -46,10 +47,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.start_background_process -> {
-            doBackgroundJobs()
-            true
-        }
         R.id.list_cities -> {
             startActivity(Intent(this, CitiesActivity::class.java))
             true
