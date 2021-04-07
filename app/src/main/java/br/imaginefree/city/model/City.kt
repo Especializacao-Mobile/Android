@@ -9,4 +9,4 @@ data class City(
     val imagem: String = "",
     val dias: String = "",
     val preco: String = ""
-): Parcelable
+) : Parcelable

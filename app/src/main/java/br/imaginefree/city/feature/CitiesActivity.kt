@@ -1,17 +1,17 @@
 package br.imaginefree.city.feature
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.imaginefree.city.bg.createChannelNotifications
-import br.imaginefree.city.bg.initWorkManagers
-import br.imaginefree.city.bg.setUpDownloadImagesWorker
-import br.imaginefree.city.bg.setUpDownloadWorker
 import br.imaginefree.city.databinding.ActivityCitiesBinding
 import br.imaginefree.city.feature.CityDetailsActivity.Companion.CITY
 import br.imaginefree.city.feature.adapter.CityAdapter
 import br.imaginefree.city.model.City
+import br.imaginefree.city.util.initWorkManagers
+import br.imaginefree.city.util.setUpDownloadImagesWorker
+import br.imaginefree.city.util.setUpDownloadWorker
 
 class CitiesActivity : AppCompatActivity() {
 
@@ -30,8 +30,8 @@ class CitiesActivity : AppCompatActivity() {
         initWorkManagers(this@CitiesActivity)
     }
 
-    private fun setUpView(){
-        cityAdapter = CityAdapter(cities){
+    private fun setUpView() {
+        cityAdapter = CityAdapter(cities) {
             val i = Intent(this, CityDetailsActivity::class.java)
             i.putExtra(CITY, it)
             startActivity(i)
@@ -40,6 +40,6 @@ class CitiesActivity : AppCompatActivity() {
         binding.rvListCities.layoutManager = LinearLayoutManager(this)
         binding.rvListCities.adapter = cityAdapter
     }
-    
+
 
 }

@@ -1,12 +1,12 @@
-package br.imaginefree.city
+package br.imaginefree.city.util
 
 import androidx.work.Constraints
 import androidx.work.Data
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequest
-import br.imaginefree.city.bg.DownloadImageWorker
-import br.imaginefree.city.bg.DownloadWorker
-import br.imaginefree.city.bg.UnzipWorker
+import br.imaginefree.city.bg.workers.DownloadImageWorker
+import br.imaginefree.city.bg.workers.DownloadWorker
+import br.imaginefree.city.bg.workers.UnzipWorker
 
 const val notificationWarning = "Worker Status"
 
@@ -22,7 +22,9 @@ val download = OneTimeWorkRequest
     .Builder(DownloadWorker::class.java)
     .setConstraints(constraints)
     .setInputData(
-        Data.Builder().putString("URL", "https://raw.githubusercontent.com/haldny/imagens/main/pacotes.json").build()
+        Data.Builder()
+            .putString("URL", "https://raw.githubusercontent.com/haldny/imagens/main/pacotes.json")
+            .build()
     )
     .build()
 
@@ -30,6 +32,7 @@ val downloadImages = OneTimeWorkRequest
     .Builder(DownloadImageWorker::class.java)
     .setConstraints(constraints)
     .setInputData(
-        Data.Builder().putString("URL", "https://github.com/haldny/imagens/raw/main/cidades.zip").build()
+        Data.Builder().putString("URL", "https://github.com/haldny/imagens/raw/main/cidades.zip")
+            .build()
     )
     .build()

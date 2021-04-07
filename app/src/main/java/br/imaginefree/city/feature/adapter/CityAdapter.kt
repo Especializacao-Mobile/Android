@@ -10,7 +10,7 @@ import br.imaginefree.city.model.City
 class CityAdapter(
     private val elements: ArrayList<City>,
     private val listener: (city: City) -> Unit
-): RecyclerView.Adapter<CityViewHolder>() {
+) : RecyclerView.Adapter<CityViewHolder>() {
 
     private lateinit var binding: ItemCityBinding
 

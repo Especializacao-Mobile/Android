@@ -18,10 +18,12 @@ class CityDetailsActivity : AppCompatActivity() {
 
         val city = intent.getParcelableExtra<City>(CITY)
         city?.let {
-            binding.image.setImageURI(File(
-                this@CityDetailsActivity.filesDir,
-                city.imagem
-            ).toUri())
+            binding.image.setImageURI(
+                File(
+                    this@CityDetailsActivity.filesDir,
+                    city.imagem
+                ).toUri()
+            )
             binding.name.text = city.local
             binding.price.text = city.preco
         }
